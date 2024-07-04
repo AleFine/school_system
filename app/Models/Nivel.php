@@ -9,15 +9,16 @@ class Nivel extends Model
 {
     use HasFactory;
 
-    // Si el nombre de la tabla no sigue la convención de pluralización
-    protected $table = 'nivels';
-
-    // Si el nombre de la clave primaria no es "id"
+    protected $table = 'niveles';
     protected $primaryKey = 'id_nivel';
 
-    // Definir los atributos que se pueden asignar en masa
     protected $fillable = [
         'turno',
         'nombre_nivel',
     ];
+
+    public function grados()
+    {
+        return $this->hasMany(Grado::class, 'id_nivel');
+    }
 }

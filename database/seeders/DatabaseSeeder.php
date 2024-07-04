@@ -8,16 +8,22 @@ use App\Models\Grado;
 use App\Models\Seccion;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Departamento;
+use App\Models\Personal;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
      */
-    public function run(): void
+    public function run()
     {
-        Seccion::factory()->count(1)->create();
-
-        
+        $this->call([
+            NivelSeeder::class,
+            GradoSeeder::class,
+            SeccionSeeder::class,
+            DepartamentoSeeder::class,
+        ]);
     }
 }

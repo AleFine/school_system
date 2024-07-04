@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
-
+    
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
@@ -72,33 +72,47 @@
                             </li>
                         </ul>
                         <ul class="menu-sub">
-                          <li class="menu-item active">
-                              <a href="{{ route('estudiantes.index') }}" class="menu-link">
-                                  <div data-i18n="Analytics">Estudiantes</div>
-                              </a>
-                          </li>
-                      </ul>
-                        <ul class="menu-sub">
                             <li class="menu-item active">
-                                <a href="{{ route('nivels.index') }}" class="menu-link">
-                                    <div data-i18n="Analytics">Niveles</div>
+                                <a href="{{ route('estudiantes.index') }}" class="menu-link">
+                                    <div data-i18n="Analytics">Estudiantes</div>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="menu-sub">
-                            <li class="menu-item active">
-                                <a href="{{ route('grados.index') }}" class="menu-link">
-                                    <div data-i18n="Analytics">Grados</div>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="menu-sub">
-                            <li class="menu-item active">
-                                <a href="{{ route('secciones.index') }}" class="menu-link">
-                                    <div data-i18n="Analytics">Secciones</div>
-                                </a>
-                            </li>
-                        </ul>
+                          </ul>
+                          <ul class="menu-sub">
+                              <li class="menu-item active">
+                                  <a href="{{ route('nivels.index') }}" class="menu-link">
+                                      <div data-i18n="Analytics">Niveles</div>
+                                  </a>
+                              </li>
+                          </ul>
+                          <ul class="menu-sub">
+                              <li class="menu-item active">
+                                  <a href="{{ route('grados.index') }}" class="menu-link">
+                                      <div data-i18n="Analytics">Grados</div>
+                                  </a>
+                              </li>
+                          </ul>
+                          <ul class="menu-sub">
+                              <li class="menu-item active">
+                                  <a href="{{ route('secciones.index') }}" class="menu-link">
+                                      <div data-i18n="Analytics">Secciones</div>
+                                  </a>
+                              </li>
+                          </ul>
+                          <ul class="menu-sub">
+                              <li class="menu-item active">
+                                  <a href="{{ route('departamento.index') }}" class="menu-link">
+                                      <div data-i18n="Analytics">Departamentos</div>
+                                  </a>
+                              </li>
+                          </ul>
+                          <ul class="menu-sub">
+                              <li class="menu-item active">
+                                  <a href="{{ route('personal.index') }}" class="menu-link">
+                                      <div data-i18n="Analytics">Personal</div>
+                                  </a>
+                              </li>
+                          </ul>
                     </li>
                     <!-- Layouts -->
                     <li class="menu-item">
@@ -133,6 +147,32 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Layouts">Cursos</div>
+                        </a> 
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="{{ route('cursos-primaria.index') }}" class="menu-link">   
+                                    <div data-i18n="cursosPrimaria">Cursos - Nivel Primaria</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ route('cursos-secundaria.index') }}" class="menu-link">
+                                        <div data-i18n="cursosSecundaria">Cursos - Nivel Secundaria</div>
+                                    </a>
+                                </li>  
+                            </ul>
+                    </li>      
+                        
+                        
+
+                </ul>
+                </li>
+            
                     </li>
                 </ul>
             </aside>
@@ -204,6 +244,7 @@
                             </div>
                         </div>
                     </div>
+                    @yield('paginacion')
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Content wrapper -->
@@ -233,6 +274,14 @@
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
+    <!-- Place this tag in your head or just before your close-->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
+        asset('assets/js/dashboards-analytics.js') }}"></script>
+
+    <!-- Place this tag in your head or just before your close-->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
+        
