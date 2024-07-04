@@ -97,7 +97,7 @@
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono">
+                <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono" style="margin-bottom: 5px">
                 @error('telefono')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

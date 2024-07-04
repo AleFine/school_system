@@ -2,16 +2,22 @@
 
 @section('contenido')
 
+<style>
+    button{
+        margin: 3px
+    }
+</style>
 <div class="container">
     <h3>LISTADO DE ESTUDIANTES</h3>
     <br>
-    <a href="{{ route('estudiantes.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo Registro</a>
-    <nav class="navbar navbar-light float-right">
-        <form class="form-inline my-2 my-lg-0" method="GET">
-            <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
-    </nav>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="{{ route('estudiantes.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>+ Nuevo Registro</a>
+        <div class="d-flex align-items-center">
+            <input name="buscarpor" class="form-control mr-2" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
+            <button class="btn btn-success" type="submit">Buscar</button>
+        </div>
+    </div>
+    
 
     <div id="mensaje">
         @if (session('datos'))

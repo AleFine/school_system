@@ -102,7 +102,7 @@
             </div>
             <div class="form-group">
                 <label for="">Teléfono</label>
-                <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono" value="{{ $estudiante->telefono }}">
+                <input style="margin-bottom: 5px" type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" name="telefono" value="{{ $estudiante->telefono }}">
                 @error('telefono')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Colegio DashBoard</title>
 
     <meta name="description" content="" />
 
@@ -62,15 +62,9 @@
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Dashboards">Dashboards</div>
-                            <div class="badge bg-danger rounded-pill ms-auto">5</div>
+                            <div class="badge bg-danger rounded-pill ms-auto">6</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item active">
-                                <a href="index.html" class="menu-link">
-                                    <div data-i18n="Analytics">Analytics</div>
-                                </a>
-                            </li>
-                        </ul>
+                      
                         <ul class="menu-sub">
                             <li class="menu-item active">
                                 <a href="{{ route('estudiantes.index') }}" class="menu-link">
@@ -118,32 +112,32 @@
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Layouts</div>
+                            <div data-i18n="Layouts">Operaciones</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Without menu</div>
+                                    <div data-i18n="Without menu">Operacion 1</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Without navbar</div>
+                                    <div data-i18n="Without navbar">Operacion 2</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="layouts-container.html" class="menu-link">
-                                    <div data-i18n="Container">Container</div>
+                                    <div data-i18n="Container">Operacion 3</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="layouts-fluid.html" class="menu-link">
-                                    <div data-i18n="Fluid">Fluid</div>
+                                    <div data-i18n="Fluid">Operacion 4</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="layouts-blank.html" class="menu-link">
-                                    <div data-i18n="Blank">Blank</div>
+                                    <div data-i18n="Blank">Operacion 5</div>
                                 </a>
                             </li>
                         </ul>
@@ -189,25 +183,33 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                      <p style="margin-top: 19px">Menú Principal</p>
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
+                          
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
                                         <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
+                                    
                                 </a>
+                                
                                 <ul class="dropdown-menu dropdown-menu-end">
+
                                     <li>
                                         <a class="dropdown-item" href="#">
                                             <div class="d-flex">
+                                              
                                                 <div class="flex-shrink-0 me-3">
+                                                  
                                                     <div class="avatar avatar-online">
+                                                        
                                                         <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-medium d-block">Administrador</span>
+                                                    <span class="fw-medium d-block">{{ auth()->user()->name }} (Administrador)</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -278,7 +280,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
-        asset('assets/js/dashboards-analytics.js') }}"></script>
+      {{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
     <!-- Place this tag in your head or just before your close-->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
