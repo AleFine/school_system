@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\GradoController;
 use App\Http\Controllers\SeccionController;
+use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\DepartamentoController;
 
 use App\Http\Controllers\Auth\AuthController;
 /*
@@ -43,3 +45,14 @@ Route::resource('grados', GradoController::class);
 Route::resource('secciones', SeccionController::class);
 
 
+Route::resource('departamento', DepartamentoController::class);
+Route::get('cancelar3', function () {
+    return redirect()->route('departamento.index')->with('datos','Acción Cancelada ..!');
+})->name('cancelar3');
+Route::get('departamento/{id}/confirmar',[DepartamentoController::class,'confirmar'])->name('departamento.confirmar');
+
+Route::resource('personal', PersonalController::class);
+Route::get('cancelar4', function () {
+    return redirect()->route('personal.index')->with('datos','Acción Cancelada ..!');
+})->name('cancelar4');
+Route::get('personal/{id}/confirmar',[PersonalController::class,'confirmar'])->name('personal.confirmar');
