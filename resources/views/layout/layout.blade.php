@@ -106,7 +106,7 @@
                                   <div data-i18n="Analytics">Estudiantes</div>
                               </a>
                           </li>
-                      </ul>
+                        </ul>
                         <ul class="menu-sub">
                             <li class="menu-item active">
                                 <a href="{{ route('nivels.index') }}" class="menu-link">
@@ -125,6 +125,20 @@
                             <li class="menu-item active">
                                 <a href="{{ route('secciones.index') }}" class="menu-link">
                                     <div data-i18n="Analytics">Secciones</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="menu-sub">
+                            <li class="menu-item active">
+                                <a href="{{ route('departamento.index') }}" class="menu-link">
+                                    <div data-i18n="Analytics">Departamentos</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="menu-sub">
+                            <li class="menu-item active">
+                                <a href="{{ route('personal.index') }}" class="menu-link">
+                                    <div data-i18n="Analytics">Personal</div>
                                 </a>
                             </li>
                         </ul>
@@ -341,6 +355,5 @@ asset('assets/js/dashboards-analytics.js') }}"></script>
 
     <!-- Place this tag in your head or just before your close-->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
+</body>
 </html>
-        
