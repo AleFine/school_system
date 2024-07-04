@@ -3,8 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\CursosPrimariaController;
 use App\Http\Controllers\CursosSecundariaController;
+use App\Http\Controllers\GradoController;
+use App\Http\Controllers\NivelController;
+use App\Http\Controllers\SeccionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +31,29 @@ Route::get('registration', [AuthController::class, 'registration'])->name('regis
 Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
 Route::get('dashboard', [AuthController::class, 'dashboard']); 
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::resource('estudiantes', EstudianteController::class);
+Route::get('cancelar_estudiante', function () {
+    return redirect()->route('estudiantes.index')->with('datos','Acción Cancelada ..!');
+})->name('cancelar_estudiante');
+Route::get('estudiante/{id}/confirmar',[EstudianteController::class,'confirmar'])->name('estudiantes.confirmar');
+
+
+
+
+
+
+
+
+//Rutas para Niveles
+Route::resource('nivels', NivelController::class);
+
+//Rutas para Grados
+Route::resource('grados', GradoController::class);
+
+//Rutas para Secciones
+Route::resource('secciones', SeccionController::class);
+
 
 
 
