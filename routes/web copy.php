@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NivelController;
-use App\Http\Controllers\GradoController;
-use App\Http\Controllers\SeccionController;
 
 use App\Http\Controllers\Auth\AuthController;
 /*
@@ -30,9 +28,3 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 //Rutas para Niveles
 Route::resource('nivels', NivelController::class);
-
-//Rutas para Grados
-Route::resource('grados', GradoController::class);
-
-//Rutas para Secciones
-Route::resource('secciones', SeccionController::class);
