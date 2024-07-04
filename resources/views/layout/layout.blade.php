@@ -46,7 +46,7 @@
                         <span class="app-brand-logo demo">
                             <!-- SVG content -->
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
+                        <img src="/assets/img/logos/logo.png" alt="BootstrapBrain Logo" width="200">
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -176,10 +176,15 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
+                                      <a class="dropdown-item" href="{{ route('logout') }}"
+                                      onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                       {{ __('Logout') }}
+                                   </a>
+                   
+                                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                       @csrf
+                                   </form>
                                     </li>
                                 </ul>
                             </li>
