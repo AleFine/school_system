@@ -184,12 +184,6 @@
                 </ul>
             </aside>
             
-                    
-
-                        
-                        
-                 
-            
 
             <!-- Layout container -->
             <div class="layout-page">
