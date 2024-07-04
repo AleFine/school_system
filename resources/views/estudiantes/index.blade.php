@@ -48,7 +48,7 @@
                 <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody style="font-size: 14x;"> <!-- Reducir tamaño de fuente -->
+        <tbody style="font-size: 10px;"> <!-- Reducir tamaño de fuente -->
             @if (count($estudiantes) <= 0)
                 <tr>
                     <td colspan="13">No hay registros</td>
