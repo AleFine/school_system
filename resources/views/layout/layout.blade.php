@@ -55,6 +55,7 @@
                 </div>
 
                 <div class="menu-inner-shadow"></div>
+                <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
@@ -77,7 +78,7 @@
                                   <div data-i18n="Analytics">Estudiantes</div>
                               </a>
                           </li>
-                      </ul>
+                        </ul>
                         <ul class="menu-sub">
                             <li class="menu-item active">
                                 <a href="{{ route('nivels.index') }}" class="menu-link">
@@ -96,6 +97,20 @@
                             <li class="menu-item active">
                                 <a href="{{ route('secciones.index') }}" class="menu-link">
                                     <div data-i18n="Analytics">Secciones</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="menu-sub">
+                            <li class="menu-item active">
+                                <a href="{{ route('departamento.index') }}" class="menu-link">
+                                    <div data-i18n="Analytics">Departamentos</div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="menu-sub">
+                            <li class="menu-item active">
+                                <a href="{{ route('personal.index') }}" class="menu-link">
+                                    <div data-i18n="Analytics">Personal</div>
                                 </a>
                             </li>
                         </ul>
@@ -229,5 +244,5 @@
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
+</body>
 </html>
