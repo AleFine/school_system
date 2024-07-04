@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CursosPrimariaController;
+use App\Http\Controllers\CursosSecundariaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +27,32 @@ Route::get('registration', [AuthController::class, 'registration'])->name('regis
 Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
 Route::get('dashboard', [AuthController::class, 'dashboard']); 
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::resource('cursos-primaria', CursosPrimariaController::class);
+Route::resource('cursos-secundaria', CursosSecundariaController::class);
+Route::get('/trabajadores/{departamento_id}', [CursosPrimariaController::class, 'getTrabajadoresByDepartamento']);
+Route::get('/trabajadores/{departamento_id}', [CursosSecundariaController::class, 'getTrabajadoresByDepartamento']);
