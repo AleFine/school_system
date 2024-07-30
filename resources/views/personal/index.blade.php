@@ -51,11 +51,11 @@
                         <td>{{ $personal->nombre_trabajador }}</td>
                         <td>{{ $personal->apellido_trabajador }}</td>
                         <td>{{ $personal->DNI }}</td>
-                        <td>{{ $personal->genero }}</td>
+                        <td>{{ $personal->direccion }}</td>
                         <td>{{ $personal->fechaIngreso}}</td>
                         <td>{{ $personal->fechaNacimiento }}</td>
                         <td>{{ $personal->telefono }}</td>
-                        <td>{{ $personal->id_departamento }}</td>
+                        <td>{{ $personal->departamento->nombre_departamento }}</td>
                         <td>
                             <a href="{{ route('personal.edit', $personal->id_trabajador) }}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Editar</a>
                             <a href="{{ route('personal.confirmar', $personal->id_trabajador) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Eliminar</a>

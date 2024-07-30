@@ -15,9 +15,11 @@ class PersonalController extends Controller
     public function index(Request $request)
     {
         $buscarpor = $request->get('buscarpor');
-        $personales = Personal::where('nombre_trabajador', 'like', '%' . $buscarpor . '%')
+        $personales = Personal::with('departamento')
+            ->where('nombre_trabajador', 'like', '%' . $buscarpor . '%')
             ->paginate($this::PAGINATION);
-        return view('personal.index',compact('personales','buscarpor'));
+
+        return view('personal.index', compact('personales', 'buscarpor'));
     }
 
     /**
