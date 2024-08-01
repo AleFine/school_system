@@ -168,13 +168,13 @@
                                     </a>
                                     <ul class="menu-sub" >
                                         <li class="menu-item">
-                                            <a href="#" class="menu-link ms-5">
-                                                <div data-i18n="">Cursos de los Grados del Nivel Primaria</div>
+                                            <a href="{{ route('grado-cursos-primaria.index') }}" class="menu-link ms-5">
+                                                <div data-i18n="">Cursos por Grado del Nivel Primaria</div>
                                             </a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#" class="menu-link ms-5">
-                                                <div data-i18n="">Cursos de los Grados del Nivel Secundaria</div>
+                                            <a href="{{ route('grado-cursos-secundaria.index') }}" class="menu-link ms-5">
+                                                <div data-i18n="">Cursos por Grado del Nivel Secundaria</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -294,6 +294,8 @@
 
     <!-- Place this tag in your head or just before your close-->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    @yield('script')
   </body>
 </html>
     <script src=  "{{ asset('assets/js/dashboards-analytics.js') }}"></script>

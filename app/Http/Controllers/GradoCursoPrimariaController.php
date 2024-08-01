@@ -4,38 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Grado;
+
 class GradoCursoPrimariaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+
+    public function index(Request $request)
     {
-        //
+        $todos = Grado::all();
+
+        foreach ($todos as $grado){
+            if($grado->id_nivel == 1){
+                $grados[] = $grado;
+            }
+        }
+
+        return view('grado.primaria.confirmar', compact('grados'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Remove the specified resource from storage.
      */
-    public function create()
+    public function show(int $id)
     {
-        //
-    }
+        $grado = Grado::findOrFail($id);
+        $cursos = $grado->cursos;
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return view('grado.primaria.index',compact('cursos','grado'));
     }
 
     /**
