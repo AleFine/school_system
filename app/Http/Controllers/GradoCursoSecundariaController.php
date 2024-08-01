@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Grado;
+
+use App\Models\Personal;
+use App\Models\Curso;
+
 class GradoCursoSecundariaController extends Controller
 {
     /**
@@ -11,7 +16,15 @@ class GradoCursoSecundariaController extends Controller
      */
     public function index()
     {
-        //
+        $todos = Grado::all();
+        $grados = collect();
+        foreach ($todos as $grado){
+            if($grado->id_nivel == 2){
+                $grados[] = $grado;
+            }
+        }
+
+        return view('grado.secundaria.confirmar', compact('grados'));
     }
 
     /**
@@ -33,9 +46,20 @@ class GradoCursoSecundariaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $cursos = collect();
+
+        $todos = Curso::all();
+        foreach($todos as $curso){
+            if($curso->id_grado == $id){
+                $cursos[] = $curso;
+            }
+        }
+        $grado = Grado::findOrFail($id);
+
+        $personales = Personal::all();
+        return view('grado.primaria.index',compact('cursos','grado','personales'));
     }
 
     /**

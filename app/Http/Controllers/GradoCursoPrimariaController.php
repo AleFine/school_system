@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Grado;
 
+use App\Models\Personal;
+use App\Models\Curso;
+
 class GradoCursoPrimariaController extends Controller
 {
 
@@ -28,10 +31,18 @@ class GradoCursoPrimariaController extends Controller
      */
     public function show(int $id)
     {
-        $grado = Grado::findOrFail($id);
-        $cursos = $grado->cursos;
+        $cursos = collect();
 
-        return view('grado.primaria.index',compact('cursos','grado'));
+        $todos = Curso::all();
+        foreach($todos as $curso){
+            if($curso->id_grado == $id){
+                $cursos[] = $curso;
+            }
+        }
+        $grado = Grado::findOrFail($id);
+
+        $personales = Personal::all();
+        return view('grado.primaria.index',compact('cursos','grado','personales'));
     }
 
     /**
