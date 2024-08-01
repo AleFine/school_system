@@ -5,7 +5,7 @@
         <h1>Registro de Nuevo Departamento</h1>
         <form method="POST" action="{{ route('departamento.store') }}">
             @csrf
-            <div class="form-group">
+            <div class="form-group mt-2 mb-2">
                 <label for="nombre_departamento">Nombre de Departamento</label>
                 <input type="text" class="form-control @error('nombre_departamento') is-invalid @enderror" id="nombre_departamento" name="nombre_departamento">
                 @error('nombre_departamento')
@@ -14,7 +14,7 @@
                     </span>
                 @enderror
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2 mb-2">
                 <label for="descripcion">Descripcion</label>
                 <input type="text" class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion">
                 @error('descripcion')

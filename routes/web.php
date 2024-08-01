@@ -14,6 +14,13 @@ use App\Http\Controllers\SeccionController;
 
 use App\Http\Controllers\EstudianteSeccionController;
 
+
+
+use App\Http\Controllers\GradoCursoPrimariaController;
+use App\Http\Controllers\GradoCursoSecundariaController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,6 +96,18 @@ Route::resource('cursos-primaria', CursosPrimariaController::class);
 Route::resource('cursos-secundaria', CursosSecundariaController::class);
 Route::get('/trabajadores/{departamento_id}', [CursosPrimariaController::class, 'getTrabajadoresByDepartamento']);
 Route::get('/trabajadores/{departamento_id}', [CursosSecundariaController::class, 'getTrabajadoresByDepartamento']);
+
+
+
+
+
+
+
+
+
+Route::resource('grado-cursos-primaria', GradoCursoPrimariaController::class);
+Route::resource('grado-cursos-secundaria', GradoCursoSecundariaController::class);
+
 
 
 

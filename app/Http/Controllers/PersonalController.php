@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Personal;
+use App\Models\Departamento;
 
 class PersonalController extends Controller
 {
@@ -15,9 +16,11 @@ class PersonalController extends Controller
     public function index(Request $request)
     {
         $buscarpor = $request->get('buscarpor');
-        $personales = Personal::where('nombre_trabajador', 'like', '%' . $buscarpor . '%')
+        $personales = Personal::with('departamento')
+            ->where('nombre_trabajador', 'like', '%' . $buscarpor . '%')
             ->paginate($this::PAGINATION);
-        return view('personal.index',compact('personales','buscarpor'));
+
+        return view('personal.index', compact('personales', 'buscarpor'));
     }
 
     /**
@@ -25,7 +28,9 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        return view('personal.create');
+        $departamentos = Departamento::all();
+
+        return view('personal.create',compact('departamentos'));
     }
 
     /**

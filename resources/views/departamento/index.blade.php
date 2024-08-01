@@ -5,13 +5,14 @@
 <div class="container">
     <h3>LISTADO DE DEPARTAMENTOS</h3>
     <br>
-    <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <form action="{{ route('departamento.index') }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
         <a href="{{ route('departamento.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>+ Nuevo Registro</a>
         <div class="d-flex align-items-center">
             <input name="buscarpor" class="form-control mr-2" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
-            <button class="btn btn-success" type="submit" style="margin-left: 5px">Buscar</button>
+            <button class="btn btn-success" type="submit">Buscar</button>
         </div>
-    </div>
+    </form>
 
     <div id="mensaje">
         @if (session('datos'))
@@ -24,7 +25,7 @@
         @endif
     </div>
 
-    <table class="table table-sm">
+    <table class="table table-sm mb-3">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Código</th>
