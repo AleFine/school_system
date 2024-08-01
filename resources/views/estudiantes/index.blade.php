@@ -10,14 +10,13 @@
 <div class="container">
     <h3>LISTADO DE ESTUDIANTES</h3>
     <br>
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <form action="{{ route('estudiantes.index') }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
         <a href="{{ route('estudiantes.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>+ Nuevo Registro</a>
         <div class="d-flex align-items-center">
             <input name="buscarpor" class="form-control mr-2" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
             <button class="btn btn-success" type="submit">Buscar</button>
         </div>
-    </div>
-    
+    </form>
 
     <div id="mensaje">
         @if (session('datos'))
@@ -29,7 +28,7 @@
             </div>
         @endif
     </div>
-    
+
     <div style="margin-bottom: 10px" class="table-responsive">
         <table class="table table-sm">
             <thead class="thead-dark">

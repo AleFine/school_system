@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Personal;
+use App\Models\Departamento;
 
 class PersonalController extends Controller
 {
@@ -27,7 +28,9 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        return view('personal.create');
+        $departamentos = Departamento::all();
+
+        return view('personal.create',compact('departamentos'));
     }
 
     /**

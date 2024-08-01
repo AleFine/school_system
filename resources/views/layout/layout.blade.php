@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
-    
+
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
@@ -34,6 +34,7 @@
     <!-- Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!-- Config: Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file. -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
+
 </head>
 <body>
     <!-- Layout wrapper -->
@@ -64,7 +65,7 @@
                             <div data-i18n="Dashboards">Dashboards</div>
                             <div class="badge bg-danger rounded-pill ms-auto">6</div>
                         </a>
-                      
+
                         <ul class="menu-sub">
                             <li class="menu-item active">
                                 <a href="{{ route('estudiantes.index') }}" class="menu-link">
@@ -147,26 +148,39 @@
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-collection"></i>
                             <div data-i18n="Layouts">Cursos</div>
-                        </a> 
-                            <ul class="menu-sub">
-                                <li class="menu-item">
-                                    <a href="{{ route('cursos-primaria.index') }}" class="menu-link">   
-                                    <div data-i18n="cursosPrimaria">Cursos - Nivel Primaria</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('cursos-primaria.index') }}" class="menu-link">
+                                <div data-i18n="cursosPrimaria">Cursos - Nivel Primaria</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('cursos-secundaria.index') }}" class="menu-link">
+                                    <div data-i18n="cursosSecundaria">Cursos - Nivel Secundaria</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <ul class="menu-item " >
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                                        <div data-i18n="">Grado - Cursos</div>
                                     </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="{{ route('cursos-secundaria.index') }}" class="menu-link">
-                                        <div data-i18n="cursosSecundaria">Cursos - Nivel Secundaria</div>
-                                    </a>
-                                </li>  
-                            </ul>
-                    </li>      
-                        
-                        
-
-                </ul>
-                </li>
-            
+                                    <ul class="menu-sub" >
+                                        <li class="menu-item">
+                                            <a href="#" class="menu-link ms-5">
+                                                <div data-i18n="">Cursos de los Grados del Nivel Primaria</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" class="menu-link ms-5">
+                                                <div data-i18n="">Cursos de los Grados del Nivel Secundaria</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </aside>
@@ -185,26 +199,26 @@
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                       <p style="margin-top: 19px">Menú Principal</p>
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                          
+
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
                                         <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
-                                    
+
                                 </a>
-                                
+
                                 <ul class="dropdown-menu dropdown-menu-end">
 
                                     <li>
                                         <a class="dropdown-item" href="#">
                                             <div class="d-flex">
-                                              
+
                                                 <div class="flex-shrink-0 me-3">
-                                                  
+
                                                     <div class="avatar avatar-online">
-                                                        
+
                                                         <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
@@ -223,7 +237,7 @@
                                                     document.getElementById('logout-form').submit();">
                                        {{ __('Logout') }}
                                    </a>
-                   
+
                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                        @csrf
                                    </form>
@@ -276,14 +290,15 @@
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
-    <!-- Place this tag in your head or just before your close-->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
-</html>
-      {{ asset('assets/js/dashboards-analytics.js') }}"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
     <!-- Place this tag in your head or just before your close-->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
-        
+    <script src=  "{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+
+    <!-- Place this tag in your head or just before your close-->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
