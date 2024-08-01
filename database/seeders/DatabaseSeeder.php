@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             GradoSeeder::class,
             SeccionSeeder::class,
             DepartamentoSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

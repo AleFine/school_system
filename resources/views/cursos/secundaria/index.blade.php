@@ -36,6 +36,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
                         </form>
+                        <a href="{{ route('cursos-secundaria.details', $curso->id_curso) }}" class="btn btn-sm btn-info">Detalle</a>
                     </td>
                 </tr>
             @endforeach

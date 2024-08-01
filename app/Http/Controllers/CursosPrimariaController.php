@@ -6,27 +6,80 @@ use App\Models\Curso;
 use App\Models\Departamento;
 use App\Models\Grado;
 use App\Models\Personal;
+use App\Models\Estudiante;
+use App\Models\EstudianteCurso;
+use App\Models\Notas;
+
 use Illuminate\Http\Request;
 
 class CursosPrimariaController extends Controller
 {
     public function index(Request $request)
-{
-    $buscarpor = $request->get('buscarpor');
+    {
+        $buscarpor = $request->get('buscarpor');
 
-    // Obtener todos los cursos que pertenecen a grados de primaria y filtrar por nombre de curso
-    $cursosPrimaria = Curso::whereHas('grado.nivel', function ($query) {
-        $query->where('nombre_nivel', 'Primaria');
-    })->where(function ($query) use ($buscarpor) {
-        if (!empty($buscarpor)) {
-            $query->where('nombre_curso', 'like', '%' . $buscarpor . '%');
+        $cursosPrimaria = Curso::whereHas('grado.nivel', function ($query) {
+            $query->where('nombre_nivel', 'Primaria');
+        })->where(function ($query) use ($buscarpor) {
+            if (!empty($buscarpor)) {
+                $query->where('nombre_curso', 'like', '%' . $buscarpor . '%');
+            }
+        })->paginate(6);
+
+        return view('cursos.primaria.index', compact('cursosPrimaria', 'buscarpor'));
+    }
+
+    public function showDetails(Curso $curso)
+    {
+        $estudiantes_del_curso=EstudianteCurso::where('id_curso', $curso->id_curso)->get();
+        
+        $notas = Notas::where('id_curso',$curso->id_curso)->get();
+        //dd($nota);
+        return view('cursos.primaria.estudiante-curso.details', compact('curso','estudiantes_del_curso','notas'));
+    }
+
+    public function showAddStudents(Curso $curso, Request $request)
+    {
+        $query = $request->input('query');
+
+        if ($query) {
+            $estudiantes = Estudiante::where('nombre_estudiante', 'like', "%$query%")
+                                    ->orWhere('apellido_estudiante', 'like', "%$query%")
+                                    ->paginate(10);
+        } else {
+            $estudiantes = Estudiante::paginate(10);
         }
-    })->paginate(6);
 
-    return view('cursos.primaria.index', compact('cursosPrimaria', 'buscarpor'));
-}
+        $añadidos = EstudianteCurso::where('id_curso', $curso->id_curso)->pluck('id_estudiante')->toArray();
 
-public function create()
+        return view('cursos.primaria.estudiante-curso.add-students', compact('curso', 'estudiantes', 'añadidos'));
+    }
+
+    public function addStudent(Request $request, Curso $curso)
+    {
+        $request->validate([
+            'id_estudiante' => 'required|exists:estudiantes,id_estudiante',
+        ]);
+
+        // Verifica si la relación ya existe para evitar duplicados
+        $exists = EstudianteCurso::where('id_curso', $curso->id_curso)
+                                  ->where('id_estudiante', $request->id_estudiante)
+                                  ->exists();
+
+        if (!$exists) {
+            EstudianteCurso::create([
+                'id_curso' => $curso->id_curso,
+                'id_estudiante' => $request->id_estudiante,
+            ]);
+        }
+
+        //dd($request->id_estudiante);
+
+        return redirect()->route('cursos-primaria.details', $curso->id_curso)
+                         ->with('success', 'Estudiante añadido correctamente.');
+    }
+
+    public function create()
     {
         $grados = Grado::with('nivel')->whereHas('nivel', function ($query) {
             $query->where('nombre_nivel', 'Primaria');

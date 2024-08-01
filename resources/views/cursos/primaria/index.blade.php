@@ -30,13 +30,14 @@
                     <td>{{ $curso->grado->nombre_grado }}</td>
                     <td>{{ $curso->trabajador->nombre_trabajador }},  {{ $curso->trabajador->apellido_trabajador }}</td>
                     <td>
-                        {{-- Aquí puedes colocar enlaces para editar, eliminar, etc. --}}
                         <a href="{{ route('cursos-primaria.edit', $curso->id_curso) }}" class="btn btn-sm btn-primary">Editar</a>
                         <form action="{{ route('cursos-primaria.destroy', $curso->id_curso) }}" method="POST" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
                         </form>
+                        <a href="{{ route('cursos-primaria.details', $curso->id_curso) }}" class="btn btn-sm btn-info">Detalle</a>
+
                     </td>
                 </tr>
             @endforeach
