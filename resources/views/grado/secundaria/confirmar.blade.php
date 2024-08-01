@@ -1,7 +1,7 @@
 @extends('layout.layout')
 @section('contenido')
 <div class="container">
-    <form id="gradoForm" action="{{ route('grado-cursos-secundaria.show', ['grado_cursos_secundarium' => '0']) }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
+    <form id="gradoForm" action="{{ route('grado.cursos.secundaria.show', ['id' => '0']) }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
         @csrf
         <div class="row">
             <div class="form-group my-2">

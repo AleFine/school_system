@@ -105,3 +105,7 @@ Route::get('/trabajadores/{departamento_id}', [CursosSecundariaController::class
 
 Route::resource('grado-cursos-primaria', GradoCursoPrimariaController::class);
 Route::resource('grado-cursos-secundaria', GradoCursoSecundariaController::class);
+
+Route::get('grado-cursos-primaria/{id}', [GradoCursoPrimariaController::class, 'show'])->name('grado.cursos.primaria.show');
+Route::get('grado-cursos-secundaria/{id}', [GradoCursoSecundariaController::class, 'show'])->name('grado.cursos.secundaria.show');
+
