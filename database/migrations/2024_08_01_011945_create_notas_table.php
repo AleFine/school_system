@@ -17,9 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_estudiante'); // Asegúrate de que esto coincida con el tipo en la tabla estudiantes
             $table->foreign('id_curso')->references('id_curso')->on('cursos')->onDelete('cascade'); 
             $table->foreign('id_estudiante')->references('id_estudiante')->on('estudiantes')->onDelete('cascade');
-            $table->integer('notaUnidad1')->default(0);
-            $table->integer('notaUnidad2')->default(0);
-            $table->integer('notaUnidad3')->default(0);
+            $table->integer('notaUnidad1')->nullable();
+            $table->integer('notaUnidad2')->nullable();
+            $table->integer('notaUnidad3')->nullable();
             $table->timestamps();
         });
         

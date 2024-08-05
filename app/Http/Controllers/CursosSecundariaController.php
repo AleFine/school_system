@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use App\Models\Departamento;
-use App\Models\EstudianteCurso;
 use App\Models\Grado;
 use App\Models\Personal;
 use App\Models\Estudiante;
@@ -33,15 +32,25 @@ class CursosSecundariaController extends Controller
 
     public function showDetails(Curso $curso)
     {
-        $estudiantes_del_curso= EstudianteCurso::where('id_curso',$curso->id_curso)->get();
         $notas = Notas::where('id_curso',$curso->id_curso)->get();
-        return view('cursos.secundaria.estudiante-curso.details',compact('curso','estudiantes_del_curso','notas'));
+        return view('cursos.secundaria.estudiante-curso.details',compact('curso','notas'));
     }
 
-    public function showAddStudents(Curso $curso)
+    public function showAddStudents(Curso $curso,Request $request)
     {
-        $estudiantes = Estudiante::all();
-        return view('cursos.secundaria.estudiante-curso.add-students',compact('curso','estudiantes'));
+        $query = $request->input('query');
+
+        if ($query) {
+            $estudiantes = Estudiante::where('nombre_estudiante', 'like', "%$query%")
+                                    ->orWhere('apellido_estudiante', 'like', "%$query%")
+                                    ->paginate(10);
+        } else {
+            $estudiantes = Estudiante::paginate(10);
+        }
+
+        $añadidos = Notas::where('id_curso', $curso->id_curso)->pluck('id_estudiante')->toArray();
+
+        return view('cursos.secundaria.estudiante-curso.add-students', compact('curso', 'estudiantes', 'añadidos'));
     }
 
     public function addStudent(Request $request, Curso $curso)
@@ -51,12 +60,12 @@ class CursosSecundariaController extends Controller
         ]);
 
         // Verifica si la relación ya existe para evitar duplicados
-        $exists = EstudianteCurso::where('id_curso', $curso->id_curso)
+        $exists = Notas::where('id_curso', $curso->id_curso)
                                   ->where('id_estudiante', $request->id_estudiante)
                                   ->exists();
 
         if (!$exists) {
-            EstudianteCurso::create([
+            Notas::create([
                 'id_curso' => $curso->id_curso,
                 'id_estudiante' => $request->id_estudiante,
             ]);
@@ -67,10 +76,6 @@ class CursosSecundariaController extends Controller
         return redirect()->route('cursos-secundaria.details', $curso->id_curso)
                          ->with('success', 'Estudiante añadido correctamente.');
     }
-
-
-
-
 
 
     public function create()

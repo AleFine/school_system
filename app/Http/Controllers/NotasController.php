@@ -61,4 +61,23 @@ class NotasController extends Controller
                         ->with('success', 'Calificaciones actualizadas correctamente');
     }
 
+    public function destroyPrimaria($id_curso, $id_estudiante)
+    {
+        $estudianteCurso = Notas::where('id_curso', $id_curso)
+                                           ->where('id_estudiante', $id_estudiante)
+                                           ->firstOrFail();
+        $estudianteCurso->delete();
+
+        return redirect()->route('cursos-primaria.details', $id_curso)->with('success', 'El estudiante ha sido eliminado del curso.');
+    }
+    
+    public function destroySecundaria($id_curso, $id_estudiante)
+    {
+        $estudianteCurso = Notas::where('id_curso', $id_curso)
+                                           ->where('id_estudiante', $id_estudiante)
+                                           ->firstOrFail();
+        $estudianteCurso->delete();
+
+        return redirect()->route('cursos-secundaria.details', $id_curso)->with('success', 'El estudiante ha sido eliminado del curso.');
+    }
 }

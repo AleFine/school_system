@@ -15,7 +15,7 @@
         
         <div class="mb-3">
             <label for="nombre_estudiante" class="form-label">Nombre del Estudiante</label>
-            <input type="text" class="form-control" id="nombre_estudiante" value="{{ $nota->estudiante->nombre_estudiante }}" disabled>
+            <input type="text" class="form-control" id="nombre_estudiante" value="{{ $nota->estudiante->nombre_estudiante }}   {{ $nota->estudiante->apellido_estudiante }}" disabled>
         </div>
         
         <div class="mb-3">

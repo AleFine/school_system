@@ -12,6 +12,7 @@ use App\Http\Controllers\GradoController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\SeccionController;
 use App\Http\Controllers\NotasController;
+use App\Http\Controllers\EstudianteCursoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,8 @@ Route::prefix('cursos-primaria/{curso}')->group(function () {
     });
 });
 
+Route::delete('/estudiante_curso/{id_curso}/{id_estudiante}', [NotasController::class, 'destroyPrimaria'])->name('estudiante_curso.destroy');
+
 
 /// Rutas para la gestión de cursos y estudiantes en el nivel secundario
 
@@ -119,6 +122,7 @@ Route::prefix('cursos-secundaria/{curso}')->group(function () {
     });
 });
 
+Route::delete('/estudiante_cursoS/{id_curso}/{id_estudiante}', [NotasController::class, 'destroySecundaria'])->name('estudiante_curso.destroy2');
 /////////////        FIN    ///////////////////
 
 

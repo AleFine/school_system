@@ -39,7 +39,12 @@
                     <td>{{ $estudiante->apellido_estudiante }}</td>
                     <td>
                         @if(in_array($estudiante->id_estudiante, $añadidos))
-                            <button class="btn btn-danger" >Eliminar Alumno</button>
+                        <form action="{{ route('estudiante_curso.destroy', ['id_curso' => $curso->id_curso, 'id_estudiante' => $estudiante->id_estudiante]) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este alumno?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Eliminar alumno</button>
+                        </form>
+                            
                         @else
                             <form action="{{ route('cursos-primaria.store-student', $curso->id_curso) }}" method="POST">
                                 @csrf
