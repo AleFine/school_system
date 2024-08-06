@@ -9,7 +9,7 @@
     <form action="{{ route('departamento.index') }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
         <a href="{{ route('departamento.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>+ Nuevo Registro</a>
         <div class="d-flex align-items-center">
-            <input name="buscarpor" class="form-control mr-2" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
+            <input name="buscarpor" class="form-control mr-2 mx-3" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
             <button class="btn btn-success" type="submit">Buscar</button>
         </div>
     </form>
@@ -25,7 +25,7 @@
         @endif
     </div>
 
-    <table class="table table-sm mb-3">
+    <table class="table table-sm my-3">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Código</th>
@@ -46,7 +46,7 @@
                         <td>{{ $departamento->nombre_departamento }}</td>
                         <td>{{ $departamento->descripcion}}</td>
                         <td>
-                            <a href="{{ route('departamento.edit', $departamento->id_departamento) }}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Editar</a>
+                            <a href="{{ route('departamento.edit', $departamento->id_departamento) }}" class="btn btn-info btn-sm me-3"><i class="fas fa-edit"></i> Editar</a>
                             <a href="{{ route('departamento.confirmar', $departamento->id_departamento) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Eliminar</a>
                         </td>
                     </tr>

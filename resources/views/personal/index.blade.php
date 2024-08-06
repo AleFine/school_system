@@ -8,7 +8,7 @@
     <form action="{{ route('personal.index') }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
         <a href="{{ route('personal.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>+ Nuevo Registro</a>
         <div class="d-flex align-items-center">
-            <input name="buscarpor" class="form-control mr-2" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
+            <input name="buscarpor" class="form-control mr-2 mx-3" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
             <button class="btn btn-success" type="submit">Buscar</button>
         </div>
     </form>

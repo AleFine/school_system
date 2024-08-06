@@ -1,12 +1,12 @@
 @extends('layout.layout')
 @section('contenido')
 <div class="container">
-    <form id="gradoForm" action="{{ route('grado.cursos.secundaria.show', ['id' => '0']) }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
+    <form id="sgradoForm" action="{{ route('grado.cursos.secundaria.show', ['id' => '0']) }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
         @csrf
         <div class="row">
             <div class="form-group my-2">
-                <label for="grado" class="my-3">Grados</label>
-                <select name="grado" class="form-control" id="grado" required>
+                <label for="sgrado" class="my-3">Grados</label>
+                <select name="sgrado" class="form-control" id="sgrado" required>
                     <option value="">Selecciona un Grado</option>
                     @foreach($grados as $grado)
                         <option value="{{ $grado->id_grado }}">{{ $grado->nombre_grado }}</option>
@@ -23,9 +23,9 @@
 
 @section('script')
     <script>
-        document.getElementById('gradoForm').addEventListener('submit', function(event) {
+        document.getElementById('sgradoForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            var gradoId = document.getElementById('grado').value;
+            var gradoId = document.getElementById('sgrado').value;
             if (gradoId) {
                 this.action = this.action.replace('0', gradoId);
                 this.submit();
