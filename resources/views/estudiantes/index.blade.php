@@ -17,6 +17,7 @@
             <button class="btn btn-success" type="submit">Buscar</button>
         </div>
     </form>
+    
 
     <div id="mensaje">
         @if (session('datos'))
@@ -28,7 +29,7 @@
             </div>
         @endif
     </div>
-
+    
     <div style="margin-bottom: 10px" class="table-responsive">
         <table class="table table-sm">
             <thead class="thead-dark">

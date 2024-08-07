@@ -74,6 +74,13 @@
                             </li>
                           </ul>
                           <ul class="menu-sub">
+                            <li class="menu-item active">
+                                <a href="{{ route('estudiantes_secciones.index') }}" class="menu-link">
+                                    <div data-i18n="Analytics">Estudiantes Seccion</div>
+                                </a>
+                            </li>
+                          </ul>
+                          <ul class="menu-sub">
                               <li class="menu-item active">
                                   <a href="{{ route('nivels.index') }}" class="menu-link">
                                       <div data-i18n="Analytics">Niveles</div>
@@ -117,8 +124,8 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Operacion 1</div>
+                                <a href="{{ route('estudiantes_secciones.index') }}" class="menu-link">
+                                    <div data-i18n="Without Menu">Asignar Estudiante a Sección</div>
                                 </a>
                             </li>
                             <li class="menu-item">

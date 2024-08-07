@@ -25,7 +25,7 @@ class GradoController extends Controller
     {
         $request->validate([
             'nombre_grado' => 'required|string|max:255',
-            'id_nivel' => 'required|exists:nivels,id_nivel',
+            'id_nivel' => 'required|exists:niveles,id_nivel',
         ]);
 
         Grado::create($request->all());
@@ -49,7 +49,7 @@ class GradoController extends Controller
     {
         $request->validate([
             'nombre_grado' => 'required|string|max:255',
-            'id_nivel' => 'required|exists:nivels,id_nivel',
+            'id_nivel' => 'required|exists:niveles,id_nivel',
         ]);
 
         $grado->update($request->all());

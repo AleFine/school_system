@@ -14,6 +14,8 @@ use App\Http\Controllers\SeccionController;
 use App\Http\Controllers\NotasController;
 use App\Http\Controllers\EstudianteCursoController;
 
+use App\Http\Controllers\EstudianteSeccionController;
+
 
 
 use App\Http\Controllers\GradoCursoPrimariaController;
@@ -143,3 +145,64 @@ Route::get('/trabajadores/{departamento_id}', [CursosSecundariaController::class
 
 Route::resource('grado-cursos-primaria', GradoCursoPrimariaController::class);
 Route::resource('grado-cursos-secundaria', GradoCursoSecundariaController::class);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::resource('estudiantes_secciones', EstudianteSeccionController::class);
+Route::get('cancelar_estudiantes_secciones', function () {
+    return redirect()->route('estudiantes_secciones.index')->with('datos','Acción Cancelada ..!');
+})->name('cancelar_estudiantes_secciones');
+Route::get('estudiantes_secciones/{id_estudiante}/{id_seccion}/confirmar', [EstudianteSeccionController::class, 'confirmar'])->name('estudiantes_secciones.confirmar');
+Route::delete('estudiantes_secciones/{id_estudiante}/{id_seccion}', [EstudianteSeccionController::class, 'destroy'])->name('estudiantes_secciones.destroy');
+
+Route::get('estudiantes_secciones/{id_estudiante}/{id_seccion}', [EstudianteSeccionController::class, 'show'])->name('estudiantes_secciones.show');
+Route::get('estudiantes_secciones/{id_estudiante}/{id_seccion}/edit', [EstudianteSeccionController::class, 'edit'])->name('estudiantes_secciones.edit');
+Route::put('estudiantes_secciones/{id_estudiante}/{id_seccion}', [EstudianteSeccionController::class, 'update'])->name('estudiantes_secciones.update');
+

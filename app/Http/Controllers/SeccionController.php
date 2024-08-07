@@ -19,7 +19,7 @@ class SeccionController extends Controller
             });
         }
 
-        $secciones = $query->get();
+        $secciones = $query->with('grado.nivel')->get(); // Incluir el nivel a través del grado
         return view('NGS.secciones.index', compact('secciones'));
     }
 
@@ -45,7 +45,7 @@ class SeccionController extends Controller
 
     public function show($id_seccion)
     {
-        $seccion = Seccion::findOrFail($id_seccion);
+        $seccion = Seccion::with('grado.nivel')->findOrFail($id_seccion); // Incluir el nivel a través del grado
         return view('NGS.secciones.show', compact('seccion'));
     }
 
