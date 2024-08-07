@@ -59,48 +59,84 @@ Route::get('cancelar3', function () {
 })->name('cancelar3');
 Route::get('departamento/{id}/confirmar',[DepartamentoController::class,'confirmar'])->name('departamento.confirmar');
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::resource('personal', PersonalController::class);
 Route::get('cancelar4', function () {
     return redirect()->route('personal.index')->with('datos','Acción Cancelada ..!');
 })->name('cancelar4');
 Route::get('personal/{id}/confirmar',[PersonalController::class,'confirmar'])->name('personal.confirmar');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::resource('cursos-primaria', CursosPrimariaController::class);
 Route::resource('cursos-secundaria', CursosSecundariaController::class);
 Route::get('/trabajadores/{departamento_id}', [CursosPrimariaController::class, 'getTrabajadoresByDepartamento']);
 Route::get('/trabajadores/{departamento_id}', [CursosSecundariaController::class, 'getTrabajadoresByDepartamento']);
-
-
-
-
-
-
-
 
 
 Route::resource('grado-cursos-primaria', GradoCursoPrimariaController::class);
