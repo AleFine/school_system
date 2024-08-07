@@ -39,5 +39,8 @@ class Curso extends Model
                     ->withPivot('notaUnidad1', 'notaUnidad2', 'notaUnidad3');
     }
 
-
+    public function Competencia()
+    {
+        return $this->belongsToMany(Competencia::class, 'detalle_cursos', 'id_curso', 'id_competencia');
+    }
 }

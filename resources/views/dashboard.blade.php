@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-11">
                 <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                    <img src="https://www.itsolutionstuff.com/assets/images/logo-it-2.png" alt="BootstrapBrain Logo" width="300">
+                    <img src="/assets/img/logos/logo.png" alt="BootstrapBrain Logo" width="300">
                 </a>          
             </div>
             <div class="col-md-1">
@@ -42,9 +42,9 @@
             </div>
         @endsession
 
-        <h1 class="display-5 fw-bold">Hi, {{ auth()->user()->name }}</h1>
-        <p class="col-md-8 fs-4">Welcome to dashboard.<br/>Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-        <button class="btn btn-primary btn-lg" type="button">Dashboard</button>
+        <h1 class="display-5 fw-bold">Hola, {{ auth()->user()->name }}</h1>
+        <p class="col-md-8 fs-4">¡Bienvenido al Sistema de Gestión Escolar!</p>
+        <a href="{{ route('welcome') }}"><button class="btn btn-primary btn-lg" type="button">Ingresar</button></a>
       </div>
     </div>
 

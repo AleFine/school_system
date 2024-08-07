@@ -21,10 +21,9 @@
           <div class="card-body p-3 p-md-4 p-xl-5">
             <div class="text-center mb-3">
               <a href="#!">
-                <img src="https://www.itsolutionstuff.com/assets/images/footer-logo-2.png" alt="BootstrapBrain Logo" width="250">
+                <img src="/assets/img/logos/logo.png" alt="BootstrapBrain Logo" width="250">
               </a>
             </div>
-            <h2 class="fs-6 fw-normal text-center text-secondary mb-4">Sign in to your account</h2>
             <form method="POST" action="{{ route('login.post') }}">
               @csrf
 
@@ -38,7 +37,7 @@
                 <div class="col-12">
                   <div class="form-floating mb-3">
                     <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="name@example.com" required>
-                    <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                    <label for="email" class="form-label">{{ __('Ingresar Usuario') }}</label>
                   </div>
                   @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -49,7 +48,7 @@
                 <div class="col-12">
                   <div class="form-floating mb-3">
                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" value="" placeholder="Password" required>
-                    <label for="password" class="form-label">{{ __('Password') }}</label>
+                    <label for="password" class="form-label">{{ __('Contraseña') }}</label>
                   </div>
                   @error('password')
                       <span class="invalid-feedback" role="alert">
@@ -62,19 +61,16 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" name="rememberMe" id="rememberMe">
                       <label class="form-check-label text-secondary" for="rememberMe">
-                        Keep me logged in
+                        Mantener sesión
                       </label>
                     </div>
-                    <a href="#!" class="link-primary text-decoration-none">{{ __('forgot password?') }}</a>
+                    <a href="#!" class="link-primary text-decoration-none">{{ __('¿Olvidó su Contraseña?') }}</a>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="d-grid my-3">
-                    <button class="btn btn-primary btn-lg" type="submit">{{ __('Login') }}</button>
+                    <button class="btn btn-primary btn-lg" type="submit">{{ __('Acceder') }}</button>
                   </div>
-                </div>
-                <div class="col-12">
-                  <p class="m-0 text-secondary text-center">Don't have an account? <a href="{{ route('register') }}" class="link-primary text-decoration-none">Sign up</a></p>
                 </div>
               </div>
             </form>
