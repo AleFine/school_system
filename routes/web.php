@@ -11,6 +11,8 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\GradoController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\SeccionController;
+use App\Http\Controllers\NotasController;
+use App\Http\Controllers\EstudianteCursoController;
 
 
 
@@ -47,9 +49,7 @@ Route::get('estudiante/{id}/confirmar',[EstudianteController::class,'confirmar']
 
 
 Route::resource('nivels', NivelController::class);
-//Rutas para Grados
 Route::resource('grados', GradoController::class);
-//Rutas para Secciones
 Route::resource('secciones', SeccionController::class);
 
 
@@ -60,78 +60,80 @@ Route::get('cancelar3', function () {
 Route::get('departamento/{id}/confirmar',[DepartamentoController::class,'confirmar'])->name('departamento.confirmar');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::resource('personal', PersonalController::class);
 Route::get('cancelar4', function () {
     return redirect()->route('personal.index')->with('datos','Acción Cancelada ..!');
 })->name('cancelar4');
 Route::get('personal/{id}/confirmar',[PersonalController::class,'confirmar'])->name('personal.confirmar');
+
+
+Route::resource('cursos-primaria', CursosPrimariaController::class);
+
+/////////////        RUTAS PARA REGISTRO DE NOTAS EN CURSOS    ///////////////////
+
+// Rutas para la gestión de cursos y estudiantes
+
+// Grupo de rutas relacionadas con los detalles del curso
+Route::prefix('cursos-primaria/{curso}')->group(function () {
+    // Ruta para mostrar los detalles de un curso
+    Route::get('/detalle', [CursosPrimariaController::class, 'showDetails'])
+        ->name('cursos-primaria.details');
+    
+    // Ruta para mostrar todos los estudiantes en la vista que agrega alumnos a un curso
+    Route::get('/agregar-estudiantes', [CursosPrimariaController::class, 'showAddStudents'])
+        ->name('cursos-primaria.add-students');
+
+    // Ruta para manejar la adición de estudiantes a un curso
+    Route::post('/agregar-estudiantes', [CursosPrimariaController::class, 'addStudent'])
+        ->name('cursos-primaria.store-student');
+    
+    // Rutas relacionadas con la edición de notas de los estudiantes en un curso específico
+    Route::prefix('edit-student')->group(function () {
+        // Ruta para mostrar el formulario de edición de notas
+        Route::get('{estudiante}', [NotasController::class, 'edit'])
+            ->name('cursos-primaria.edit-student');
+
+        // Ruta para actualizar las notas de un estudiante en un curso específico
+        Route::put('update-student/{estudiante}', [NotasController::class, 'update'])
+            ->name('cursos-primaria.update-student');
+    });
+});
+
+Route::delete('/estudiante_curso/{id_curso}/{id_estudiante}', [NotasController::class, 'destroyPrimaria'])->name('estudiante_curso.destroy');
+
+
+/// Rutas para la gestión de cursos y estudiantes en el nivel secundario
+
+// Grupo de rutas relacionadas con los cursos secundarios
+Route::prefix('cursos-secundaria/{curso}')->group(function () {
+    // Ruta para mostrar los detalles de un curso secundario
+    Route::get('/detalle', [CursosSecundariaController::class, 'showDetails'])
+        ->name('cursos-secundaria.details');
+
+    // Ruta para mostrar todos los estudiantes en la vista que agrega alumnos a un curso secundario
+    Route::get('/agregar-estudiantes', [CursosSecundariaController::class, 'showAddStudents'])
+        ->name('cursos-secundaria.add-students');
+
+    // Ruta para manejar la adición de estudiantes a un curso secundario
+    Route::post('/agregar-estudiantes', [CursosSecundariaController::class, 'addStudent'])
+        ->name('cursos-secundaria.store-student');
+
+    // Rutas relacionadas con la edición de notas de los estudiantes en un curso secundario
+    Route::prefix('edit-student')->group(function () {
+        // Ruta para mostrar el formulario de edición de notas
+        Route::get('{estudiante}', [NotasController::class, 'edit2'])
+            ->name('cursos-secundaria.edit-student');
+
+        // Ruta para actualizar las notas de un estudiante en un curso secundario
+        Route::put('update-student/{estudiante}', [NotasController::class, 'update'])
+            ->name('cursos-secundaria.update-student');
+    });
+});
+
+Route::delete('/estudiante_cursoS/{id_curso}/{id_estudiante}', [NotasController::class, 'destroySecundaria'])->name('estudiante_curso.destroy2');
+/////////////        FIN    ///////////////////
+
+
 
 Route::resource('cursos-primaria', CursosPrimariaController::class);
 Route::resource('cursos-secundaria', CursosSecundariaController::class);

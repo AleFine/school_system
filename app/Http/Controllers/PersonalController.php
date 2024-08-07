@@ -113,6 +113,7 @@ class PersonalController extends Controller
         $personal = Personal::findOrFail($id);
 
         $personal->fill($data);
+        dd($personal);
         $personal->save();
 
         return redirect()->route('personal.index')->with('datos', 'Registro Actualizado...!');

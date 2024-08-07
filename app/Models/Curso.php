@@ -36,6 +36,7 @@ class Curso extends Model
     public function estudiantes()
     {
         return $this->belongsToMany(Estudiante::class, 'estudiante_curso', 'id_curso', 'id_estudiante')
+                    ->using(EstudianteCurso::class)
                     ->withPivot('notaUnidad1', 'notaUnidad2', 'notaUnidad3');
     }
 
