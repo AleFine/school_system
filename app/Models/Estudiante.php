@@ -24,7 +24,13 @@ class Estudiante extends Model
         'distrito',
         'estado_civil',
         'telefono',
+        'id_seccion',
     ];
+
+    public function seccion()
+    {
+        return $this->belongsTo(Seccion::class, 'id_seccion');
+    }
 
     public function cursos()
     {

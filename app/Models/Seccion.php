@@ -22,4 +22,9 @@ class Seccion extends Model
     {
         return $this->belongsTo(Grado::class, 'id_grado');
     }
+
+    public function estudiantes()
+    {
+        return $this->hasMany(Estudiante::class, 'id_seccion');
+    }
 }

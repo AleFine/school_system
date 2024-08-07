@@ -24,8 +24,9 @@ return new class extends Migration
             $table->string('distrito');
             $table->string('estado_civil');
             $table->string('telefono');
+            $table->unsignedBigInteger('id_seccion')->nullable();
+            $table->foreign('id_seccion')->references('id_seccion')->on('secciones')->onDelete('set null');
             $table->timestamps();
-
         });
     }
 
