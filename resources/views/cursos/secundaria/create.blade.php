@@ -34,20 +34,28 @@
                     <input type="text" name="nombre_curso" class="form-control" value="{{ old('nombre_curso') }}" required>
                 </div>
 
-                <!-- Nivel (automáticamente Primaria) -->
+                <!-- Nivel (automáticamente Secundaria) -->
                 <div class="form-group">
                     <label for="nivel">Nivel</label>
                     <input type="text" name="nivel" class="form-control" value="Secundaria" readonly disabled>
                 </div>
 
-                <!-- Grado (filtrado por nivel Primaria) -->
+                <!-- Grado (filtrado por nivel Secundaria) -->
                 <div class="form-group">
-                    <label for="id_grado">Grado</label>
-                    <select name="id_grado" class="form-control" required>
+                    <label for="grado">Grado</label>
+                    <select name="grado" class="form-control" id="grado" required>
                         <option value="">Selecciona un Grado</option>
                         @foreach($grados as $grado)
                             <option value="{{ $grado->id_grado }}">{{ $grado->nombre_grado }}</option>
                         @endforeach
+                    </select>
+                </div>
+
+                <!-- Sección (filtrada por grado seleccionado) -->
+                <div class="form-group">
+                    <label for="id_seccion">Sección</label>
+                    <select name="id_seccion" class="form-control" id="seccion" required>
+                        <option value="">Selecciona una Sección</option>
                     </select>
                 </div>
 
@@ -87,9 +95,34 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const gradoSelect = document.getElementById('grado');
+        const seccionSelect = document.getElementById('seccion');
         const departamentoSelect = document.getElementById('departamento');
         const trabajadorSelect = document.getElementById('trabajador');
 
+        // Filtrar secciones por grado seleccionado
+        gradoSelect.addEventListener('change', function () {
+            const gradoId = this.value;
+
+            if (gradoId) {
+                fetch(`/api/secciones/${gradoId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        seccionSelect.innerHTML = '<option value="">Selecciona una Sección</option>';
+                        data.forEach(seccion => {
+                            const option = document.createElement('option');
+                            option.value = seccion.id_seccion;
+                            option.textContent = seccion.nombre_seccion;
+                            seccionSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                seccionSelect.innerHTML = '<option value="">Selecciona una Sección</option>';
+            }
+        });
+
+        // Filtrar trabajadores por departamento seleccionado
         departamentoSelect.addEventListener('change', function () {
             const departamentoId = this.value;
 
@@ -101,7 +134,7 @@
                         data.forEach(trabajador => {
                             const option = document.createElement('option');
                             option.value = trabajador.id_trabajador;
-                            option.textContent = trabajador.nombre_trabajador + ', ' +trabajador.apellido_trabajador;
+                            option.textContent = trabajador.nombre_trabajador + ', ' + trabajador.apellido_trabajador;
                             trabajadorSelect.appendChild(option);
                         });
                     })
@@ -112,6 +145,7 @@
         });
 
         // Trigger change event to initialize the state
+        gradoSelect.dispatchEvent(new Event('change'));
         departamentoSelect.dispatchEvent(new Event('change'));
     });
 </script>

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('estudiante_curso', function (Blueprint $table) {
             $table->unsignedBigInteger('id_curso');
             $table->unsignedBigInteger('id_estudiante');
-            //$table->integer('notaUnidad1')->default(0);  // Valor por defecto de 0
-            //$table->integer('notaUnidad2')->default(0);  // Valor por defecto de 0
-            //$table->integer('notaUnidad3')->default(0);  // Valor por defecto de 0
+            $table->integer('notaUnidad1')->default(0);  // Valor por defecto de 0
+            $table->integer('notaUnidad2')->default(0);  // Valor por defecto de 0
+            $table->integer('notaUnidad3')->default(0);  // Valor por defecto de 0
             $table->foreign('id_curso')->references('id_curso')->on('cursos')->onDelete('cascade');
             $table->foreign('id_estudiante')->references('id_estudiante')->on('estudiantes')->onDelete('cascade');
             $table->primary(['id_curso', 'id_estudiante']);

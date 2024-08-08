@@ -2,34 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+namespace App\Models;
 
-class EstudianteCurso extends Pivot
+use Illuminate\Database\Eloquent\Model;
+
+class EstudianteCurso extends Model
 {
-    protected $table = 'estudiante_curso';
-    public $incrementing = false;
-    public $timestamps = false;
+    protected $table = 'estudiante_curso'; // Nombre de la tabla
+    protected $fillable = ['id_curso', 'id_estudiante', 'notaUnidad1', 'notaUnidad2', 'notaUnidad3'];
 
-    protected $fillable = [
-        'id_curso',
-        'id_estudiante',
-        'notaUnidad1',
-        'notaUnidad2',
-        'notaUnidad3',
-    ];
+    public $incrementing = false; // Indica que no hay una columna auto-incremental
 
-    // Si deseas definir la clave primaria compuesta, puedes hacer lo siguiente:
-    protected $primaryKey = ['id_curso', 'id_estudiante'];
+    protected $primaryKey = ['id_curso', 'id_estudiante']; // Define las claves primarias si son compuestas
 
-    // Método para obtener el estudiante relacionado
     public function estudiante()
     {
         return $this->belongsTo(Estudiante::class, 'id_estudiante');
     }
 
-    // Método para obtener el curso relacionado
     public function curso()
     {
         return $this->belongsTo(Curso::class, 'id_curso');
     }
 }
+
+

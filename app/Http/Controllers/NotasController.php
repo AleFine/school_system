@@ -57,7 +57,7 @@ class NotasController extends Controller
         $nota->save();
 
         // Redirige con un mensaje de éxito
-        return redirect()->route('cursos-primaria.details', $curso->id_curso)
+        return redirect()->back()
                         ->with('success', 'Calificaciones actualizadas correctamente');
     }
 

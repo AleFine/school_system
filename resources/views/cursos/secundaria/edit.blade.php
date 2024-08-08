@@ -34,16 +34,16 @@
                     <input type="text" name="nombre_curso" class="form-control" value="{{ old('nombre_curso', $curso->nombre_curso) }}" required>
                 </div>
 
-                <!-- Nivel (automáticamente Primaria) -->
+                <!-- Nivel (automáticamente Secundaria) -->
                 <div class="form-group">
                     <label for="nivel">Nivel</label>
-                    <input type="text" name="nivel" class="form-control" value="Primaria" readonly disabled>
+                    <input type="text" name="nivel" class="form-control" value="Secundaria" readonly disabled>
                 </div>
 
-                <!-- Grado (filtrado por nivel Primaria) -->
+                <!-- Grado (filtrado por nivel Secundaria) -->
                 <div class="form-group">
-                    <label for="id_grado">Grado</label>
-                    <select name="id_grado" class="form-control" required>
+                    <label for="grado">Grado</label>
+                    <select name="id_grado" class="form-control" id="grado" required>
                         <option value="">Selecciona un Grado</option>
                         @foreach($grados as $grado)
                             <option value="{{ $grado->id_grado }}" {{ $grado->id_grado == old('id_grado', $curso->id_grado) ? 'selected' : '' }}>
@@ -53,13 +53,26 @@
                     </select>
                 </div>
 
+                <!-- Sección (filtrada por grado seleccionado) -->
+                <div class="form-group">
+                    <label for="id_seccion">Sección</label>
+                    <select name="id_seccion" class="form-control" id="seccion" required>
+                        <option value="">Selecciona una Sección</option>
+                        @foreach($secciones as $seccion)
+                            <option value="{{ $seccion->id_seccion }}" {{ $seccion->id_seccion == old('id_seccion', $curso->id_seccion) ? 'selected' : '' }}>
+                                {{ $seccion->nombre_seccion }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <!-- Departamento para filtrar docentes -->
                 <div class="form-group">
                     <label for="departamento">Departamento</label>
-                    <select name="departamento" class="form-control" id="departamento" required>
+                    <select name="id_departamento" class="form-control" id="departamento" required>
                         <option value="">Selecciona un Departamento</option>
                         @foreach($departamentos as $departamento)
-                            <option value="{{ $departamento->id_departamento }}" {{ $departamento->id_departamento == old('departamento', $curso->id_departamento) ? 'selected' : '' }}>
+                            <option value="{{ $departamento->id_departamento }}" {{ $departamento->id_departamento == old('id_departamento', $curso->id_departamento) ? 'selected' : '' }}>
                                 {{ $departamento->nombre_departamento }}
                             </option>
                         @endforeach
@@ -82,7 +95,7 @@
                 <!-- Botón para enviar el formulario -->
                 <div class="form-group mt-3">
                     <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
-                    <a href="{{ route('cursos-primaria.index') }}" class="btn btn-secondary btn-block">Cancelar</a>
+                    <a href="{{ route('cursos-secundaria.index') }}" class="btn btn-secondary btn-block">Cancelar</a>
                 </div>
             </form>
         </div>
@@ -96,9 +109,37 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const gradoSelect = document.getElementById('grado');
+        const seccionSelect = document.getElementById('seccion');
         const departamentoSelect = document.getElementById('departamento');
         const trabajadorSelect = document.getElementById('trabajador');
 
+        // Inicializar secciones con el grado actual del curso
+        gradoSelect.addEventListener('change', function () {
+            const gradoId = this.value;
+
+            if (gradoId) {
+                fetch(`/api/secciones/${gradoId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        seccionSelect.innerHTML = '<option value="">Selecciona una Sección</option>';
+                        data.forEach(seccion => {
+                            const option = document.createElement('option');
+                            option.value = seccion.id_seccion;
+                            option.textContent = seccion.nombre_seccion;
+                            seccionSelect.appendChild(option);
+                        });
+
+                        // Seleccionar la sección actual del curso
+                        seccionSelect.value = '{{ $curso->id_seccion }}';
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                seccionSelect.innerHTML = '<option value="">Selecciona una Sección</option>';
+            }
+        });
+
+        // Filtrar trabajadores por departamento seleccionado
         departamentoSelect.addEventListener('change', function () {
             const departamentoId = this.value;
 
@@ -110,9 +151,12 @@
                         data.forEach(trabajador => {
                             const option = document.createElement('option');
                             option.value = trabajador.id_trabajador;
-                            option.textContent = trabajador.nombre_trabajador + ', ' +trabajador.apellido_trabajador;
+                            option.textContent = trabajador.nombre_trabajador + ', ' + trabajador.apellido_trabajador;
                             trabajadorSelect.appendChild(option);
                         });
+
+                        // Seleccionar el trabajador actual del curso
+                        trabajadorSelect.value = '{{ $curso->id_trabajador }}';
                     })
                     .catch(error => console.error('Error:', error));
             } else {
@@ -120,12 +164,10 @@
             }
         });
 
-        // Trigger change event to initialize the state
+        // Trigger change events to initialize the state
+        gradoSelect.dispatchEvent(new Event('change'));
         departamentoSelect.dispatchEvent(new Event('change'));
     });
 </script>
 
 @endsection
-
-
-

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_estudiante');
             $table->unsignedBigInteger('id_seccion');
             $table->timestamps();
-
             $table->foreign('id_estudiante')->references('id_estudiante')->on('estudiantes')->onDelete('cascade');
             $table->foreign('id_seccion')->references('id_seccion')->on('secciones')->onDelete('cascade');
             $table->primary(['id_estudiante', 'id_seccion']);

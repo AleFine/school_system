@@ -7,6 +7,7 @@ use App\Models\Curso;
 use App\Models\Grado;
 use App\Models\Personal;
 use App\Models\Nivel;
+use App\Models\Seccion; // Asegúrate de importar el modelo Seccion
 use Faker\Factory as Faker;
 
 class CursoSeeder extends Seeder
@@ -30,30 +31,36 @@ class CursoSeeder extends Seeder
             return;
         }
 
-        // Crear 6 cursos por cada grado de primaria
+        // Crear 6 cursos por cada sección de cada grado de primaria
         foreach ($nivelesPrimaria as $nivel) {
             $grados = $nivel->grados;
             foreach ($grados as $grado) {
-                for ($i = 1; $i <= 6; $i++) {
-                    Curso::create([
-                        'nombre_curso' => 'Curso ' . $i . ' - ' . $grado->nombre_grado,
-                        'id_grado' => $grado->id_grado,
-                        'id_trabajador' => $this->getRandomTeacherId(),
-                    ]);
+                $secciones = Seccion::where('id_grado', $grado->id_grado)->get();
+                foreach ($secciones as $seccion) {
+                    for ($i = 1; $i <= 6; $i++) {
+                        Curso::create([
+                            'nombre_curso' => 'Curso ' . $i . ' - ' . $grado->nombre_grado . ' - ' . $seccion->nombre_seccion,
+                            'id_seccion' => $seccion->id_seccion,
+                            'id_trabajador' => $this->getRandomTeacherId(),
+                        ]);
+                    }
                 }
             }
         }
 
-        // Crear 6 cursos por cada grado de secundaria
+        // Crear 6 cursos por cada sección de cada grado de secundaria
         foreach ($nivelesSecundaria as $nivel) {
             $grados = $nivel->grados;
             foreach ($grados as $grado) {
-                for ($i = 1; $i <= 6; $i++) {
-                    Curso::create([
-                        'nombre_curso' => 'Curso ' . $i . ' - ' . $grado->nombre_grado,
-                        'id_grado' => $grado->id_grado,
-                        'id_trabajador' => $this->getRandomTeacherId(),
-                    ]);
+                $secciones = Seccion::where('id_grado', $grado->id_grado)->get();
+                foreach ($secciones as $seccion) {
+                    for ($i = 1; $i <= 6; $i++) {
+                        Curso::create([
+                            'nombre_curso' => 'Curso ' . $i . ' - ' . $grado->nombre_grado . ' - ' . $seccion->nombre_seccion,
+                            'id_seccion' => $seccion->id_seccion,
+                            'id_trabajador' => $this->getRandomTeacherId(),
+                        ]);
+                    }
                 }
             }
         }

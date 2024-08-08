@@ -14,13 +14,13 @@ class Curso extends Model
 
     protected $fillable = [
         'nombre_curso',
-        'id_grado',
+        'id_seccion',
         'id_trabajador',
     ];
 
-    public function grado()
+    public function seccion()
     {
-        return $this->belongsTo(Grado::class, 'id_grado');
+        return $this->belongsTo(Seccion::class, 'id_seccion');
     }
 
     public function trabajador()
@@ -35,9 +35,7 @@ class Curso extends Model
 
     public function estudiantes()
     {
-        return $this->belongsToMany(Estudiante::class, 'estudiante_curso', 'id_curso', 'id_estudiante')
-                    ->using(EstudianteCurso::class)
-                    ->withPivot('notaUnidad1', 'notaUnidad2', 'notaUnidad3');
+        return $this->hasMany(Notas::class, 'id_curso', 'id_curso');
     }
 
 

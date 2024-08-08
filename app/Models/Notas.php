@@ -30,15 +30,13 @@ class Notas extends Model
         'notaUnidad3',
     ];
 
-    // Definir la relación con el modelo Curso
-    public function curso()
-    {
-        return $this->belongsTo(Curso::class, 'id_curso');
-    }
-
-    // Definir la relación con el modelo Estudiante
     public function estudiante()
     {
         return $this->belongsTo(Estudiante::class, 'id_estudiante');
+    }
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class, 'id_curso');
     }
 }

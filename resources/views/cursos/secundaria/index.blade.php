@@ -17,6 +17,7 @@
                 <th>ID</th>
                 <th>Nombre del Curso</th>
                 <th>Grado</th>
+                <th>Seccion</th>
                 <th>Docente</th>
                 <th>Acciones</th>
             </tr>
@@ -26,7 +27,8 @@
                 <tr class="text-center">
                     <td>{{ $curso->id_curso }}</td>
                     <td>{{ $curso->nombre_curso }}</td>
-                    <td>{{ $curso->grado->nombre_grado }}</td>
+                    <td>{{ $curso->seccion->grado->nombre_grado }}</td>
+                    <td>{{ $curso->seccion->nombre_seccion }}</td>
                     <td>{{ $curso->trabajador->nombre_trabajador }},  {{ $curso->trabajador->apellido_trabajador }}</td>
                     <td>
                         {{-- Aquí puedes colocar enlaces para editar, eliminar, etc. --}}

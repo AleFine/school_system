@@ -163,6 +163,9 @@ Route::get('competencias/{id}/confirmar',[CompetenciaController::class,'confirma
 
 
 
+Route::get('/cursos-primaria/{curso}/reporte-notas', [CursosPrimariaController::class, 'generarReporteNotas'])->name('cursos-primaria.reporte-notas');
+
+Route::get('/cursos-secundaria/{curso}/reporte-notas', [CursosSecundariaController::class, 'generarReporteNotas'])->name('cursos-secundaria.reporte-notas');
 
 
 
@@ -186,9 +189,8 @@ Route::get('competencias/{id}/confirmar',[CompetenciaController::class,'confirma
 
 
 
-
-
-
+Route::get('/api/grados/{nivel_id}', [EstudianteSeccionController::class, 'getGradosByNivel']);
+Route::get('/api/secciones/{grado_id}', [EstudianteSeccionController::class, 'getSeccionesByGrado']);
 
 
 
