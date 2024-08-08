@@ -28,7 +28,7 @@
             @endphp
             @if (count($lista_estudiantes) <= 0)
                 <tr>
-                    <td colspan="13">No hay registros</td>
+                    <td colspan="13">Sin estudiantes de tercio superior</td>
                 </tr>
             @else
                 @foreach ($lista_estudiantes as $est)
