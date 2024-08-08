@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="d-flex justify-content-center">
-        <h2 class="fw-bold text-info">Tercio Superior</h2>
+        <peri class="fw-bold text-info">Tercio Superior</h2>
     </div>
 
     <div class="d-flex justify-content-between ">
@@ -19,10 +19,13 @@
             <tr>
                 <th scope="col">Puesto</th>
                 <th scope="col">Nombre de Estudiante</th>
-                <eral scope="col">Promedio General</eral>
+                <th scope="col">Promedio General</th>
             </tr>
         </thead>
         <tbody style="font-size: 14x;"> <!-- Reducir tamaño de fuente -->
+            @php
+                $i = 1;
+            @endphp
             @if (count($lista_estudiantes) <= 0)
                 <tr>
                     <td colspan="13">No hay registros</td>
@@ -30,10 +33,13 @@
             @else
                 @foreach ($lista_estudiantes as $est)
                     <tr>
-                        @if ($est->nota>16)
-                            <td>{{$est->id_estudiante}}</td>
+                        @if ($est->nota>=16)
+                            <td>{{$i}}</td>
                             <td>{{$est->nombre}}</td>
                             <td>{{$est->nota}}</td>
+                            @php
+                                $i++;
+                            @endphp
                         @endif
                     </tr>
                 @endforeach

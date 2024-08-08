@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Curso;
 use App\Models\Grado;
+use App\Models\EstudianteSeccion;
 use App\Models\Estudiante;
 use App\Models\Notas;
+use App\Models\Seccion;
 
 class TercioPrimariaController extends Controller
 {
@@ -29,50 +31,59 @@ class TercioPrimariaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id) #el parametro es el id_delgrado
     {
-        $todos = Estudiante::all();
+        $todos_estudiantes = Estudiante::all();
+        $estudiantes_seccion = EstudianteSeccion::all();
         $notas_totales = Notas::all();
-        $cursos_totales = Curso::all();
+
         $lista_estudiantes = [];
-        $estudiantes = collect();
-        $cursos = collect();
+        $estudiantes = [];
 
-        foreach ($todos as $estudiante){
-            if($estudiante->id_grado == $id){
-                $estudiantes[] = $estudiante; #aca ya tenemos los estudiantes del nivel primaria y su grado
-            }
-        }
+        $secciones = Seccion::where('id_grado', $id)->get(); //todas las secciones relacionadas con este grado
+        $cursos = Curso::where('id_grado', $id)->get();
 
-        foreach($cursos_totales as $curso){
-            if($curso->id_grado == $id){
-                $cursos[] = $curso; #todos los cursos los cuales esten relacionados a este grado
-            }
-        }
-
-        $cantidad = count($cursos);
-        $i = 0;
-
-        foreach ($estudiantes as $estudiante){
-            $promedio = 0;
-            foreach($notas_totales as $not){
-                if($not->id_estudiante == $estudiante->id_estudiante){
-                    $promedio = $promedio + ($not->notaUnidad1 + $not->notaUnidad2 + $not->notaUnidad3)/3.0;
+        foreach($estudiantes_seccion as $estsec){
+            foreach($secciones as $section){
+                if($section->id_seccion == $estsec->id_seccion){
+                    foreach($todos_estudiantes as $estudiante){
+                        if($estudiante->id_estudiante == $estsec->id_estudiante){
+                            $estudiantes[] = $estudiante;
+                        }
+                    }
                 }
             }
-            $lista_estudiantes[] = new Nota_Estudiante($i, $estudiante->nombre_estudiante,$promedio/$cantidad);
-            $i++;
         }
 
-        $grade = Grado::findOrFail($id);
+        $cantidad = count($cursos) + 1; #sacamos la cantidad de cursos para dividir al nota general total del alumno entre esta cantidad
 
-        usort($lista_estudiantes,'comparar_notas');
+        if($cantidad<=0){
+            $lista_estudiantes[] = [];
+        }
+        else{
+            foreach ($estudiantes as $estudiante){
+                $promedio = 0;
+                foreach($notas_totales as $not){
+                    if($not->id_estudiante == $estudiante->id_estudiante){
+                        $promedio +=  ($not->notaUnidad1 + $not->notaUnidad2 + $not->notaUnidad3)/3.0;
+                    } #hacemos dos foreach para sumar repetidamente todas las notas de los diferentes cursos
+                }
+
+                $promedio_final = (float) $promedio / $cantidad;
+                $promedios[] = $promedio_final;
+                $lista_estudiantes[] = new Nota_Estudiante($estudiante->id_estudiante, $estudiante->nombre_estudiante,$promedio_final); #adicionamos a la lista un nuevo objeto
+            }
+
+            //dd($promedios);
+
+            usort($lista_estudiantes, function($a, $b) {
+                return $b->getNota() - $a->getNota();
+            });
+        }
+
+        $grade = Grado::findOrFail($id); #pasamos el grado a la vista
+
         return view('tercio.primaria.index',compact('lista_estudiantes','grade'));
-
-    }
-
-    function comparar_notas($a, $b) {
-        return $b->getNota() - $a->getNota();
     }
 
     /**
