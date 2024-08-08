@@ -136,9 +136,24 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Operacion 2</div>
-                                </a>
+                                <ul class="menu-item " >
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="menu-icon tf-icons bx bx-layout"></i>
+                                        <div data-i18n="">Tercio - Superior</div>
+                                    </a>
+                                    <ul class="menu-sub" >
+                                        <li class="menu-item">
+                                            <a href="{{ route('tercio-primaria.index') }}" class="menu-link ms-5">
+                                                <div data-i18n="">Nivel Primaria</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{{ route('tercio-secundaria.index') }}" class="menu-link ms-5">
+                                                <div data-i18n="">Nivel Secundaria</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </ul>
                             </li>
                             <li class="menu-item">
                                 <a href="layouts-container.html" class="menu-link">

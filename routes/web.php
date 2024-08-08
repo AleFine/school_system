@@ -15,6 +15,8 @@ use App\Http\Controllers\NotasController;
 use App\Http\Controllers\EstudianteCursoController;
 use App\Http\Controllers\CompetenciaController;
 use App\Http\Controllers\EstudianteSeccionController;
+use App\Http\Controllers\TercioPrimariaController;
+use App\Http\Controllers\TercioSecundariaController;
 
 
 
@@ -154,7 +156,10 @@ Route::resource('competencias', CompetenciaController::class);
 Route::get('competencias/{id}/confirmar',[CompetenciaController::class,'confirmar'])->name('competencias.confirmar');
 
 
-
+Route::resource('tercio-primaria', TercioPrimariaController::class);
+Route::resource('tercio-secundaria', TercioSecundariaController::class);
+Route::get('tercio-primaria/{id}', [TercioPrimariaController::class, 'show'])->name('tercio.primaria.show');
+Route::get('tercio-secundaria/{id}', [TercioSecundariaController::class, 'show'])->name('tercio.secundaria.show');
 
 
 
