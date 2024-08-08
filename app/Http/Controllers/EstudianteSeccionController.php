@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EstudianteSeccion;
 use App\Models\Estudiante;
 use App\Models\Seccion;
+use App\Models\Nivel;
 use App\Models\Grado;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,9 @@ class EstudianteSeccionController extends Controller
     public function create()
     {
         $estudiantes = Estudiante::all();
+        $niveles = Nivel::all();
         $secciones = Seccion::with(['grado.nivel'])->get();
-        return view('estudiantes_secciones.create', compact('estudiantes', 'secciones'));
+        return view('estudiantes_secciones.create', compact('estudiantes', 'niveles', 'secciones'));
     }
 
     public function store(Request $request)
