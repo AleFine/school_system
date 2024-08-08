@@ -160,16 +160,6 @@
                                     <div data-i18n="Container">Operacion 3</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-fluid.html" class="menu-link">
-                                    <div data-i18n="Fluid">Operacion 4</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-blank.html" class="menu-link">
-                                    <div data-i18n="Blank">Operacion 5</div>
-                                </a>
-                            </li>
                         </ul>
                     </li>
 
