@@ -15,11 +15,8 @@
 
     <div id="mensaje">
         @if (session('datos'))
-            <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            <div class="alert alert-success" role="alert">
                 {{ session('datos') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
         @endif
     </div>
@@ -46,7 +43,7 @@
                 </tr>
             @else
                 @foreach ($personales as $personal)
-                    <tr>
+                    <tr class="text-sm">
                         <td>{{ $personal->id_trabajador }}</td>
                         <td>{{ $personal->nombre_trabajador }}</td>
                         <td>{{ $personal->apellido_trabajador }}</td>

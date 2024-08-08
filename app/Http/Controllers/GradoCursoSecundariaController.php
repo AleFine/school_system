@@ -59,7 +59,7 @@ class GradoCursoSecundariaController extends Controller
         $grado = Grado::findOrFail($id);
 
         $personales = Personal::all();
-        return view('grado.primaria.index',compact('cursos','grado','personales'));
+        return view('grado.secundaria.index',compact('cursos','grado','personales'));
     }
 
     /**
