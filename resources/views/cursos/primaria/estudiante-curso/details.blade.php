@@ -5,21 +5,24 @@
 <div class="container">
     <p class="text-center fs-2 p-2 my-2">Detalles del Curso</p>
     
-    <div class="d-flex justify-content-between mb-3">
-        <a href="{{ route('cursos-primaria.index') }}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Volver
-        </a>
-        <a href="{{ route('cursos-primaria.add-students', $curso->id_curso) }}" class="btn btn-primary">
-            <i class="fas fa-user-plus"></i> Añadir Estudiantes
-        </a>
-    </div>
+    <div class="d-flex justify-content-end mb-3">
+            <a href="{{ route('cursos-primaria.index') }}" class="btn btn-secondary me-2">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+            <a href="{{ route('cursos.competencias', $curso->id_curso) }}" class="btn btn-primary me-2">
+                <i class="fas fa-list"></i> Ver competencias
+            </a>
+            <a href="{{ route('cursos-primaria.add-students', $curso->id_curso) }}" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Añadir Estudiantes
+            </a>
+        </div>
 
     <div class="card mb-4">
         <div class="card-body">
             <h3 class="card-title">Curso: {{ $curso->nombre_curso }}</h3>
             <p><strong>Nivel: </strong>{{ $curso->grado->nivel->nombre_nivel }}</p>
-            <p><strong>Grado:</strong> {{ $curso->grado->nombre_grado }}</p>
-            <p><strong>Docente:</strong> {{ $curso->trabajador->nombre_trabajador }}, {{ $curso->trabajador->apellido_trabajador }}</p>
+            <p><strong>Grado: </strong> {{ $curso->grado->nombre_grado }}</p>
+            <p><strong>Docente: </strong> {{ $curso->trabajador->nombre_trabajador }}, {{ $curso->trabajador->apellido_trabajador }}</p>
         </div>
     </div>
 
