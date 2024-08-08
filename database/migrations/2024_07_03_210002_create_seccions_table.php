@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('secciones', function (Blueprint $table) {
             $table->id('id_seccion');
-            $table->integer('numero_aula');
+            $table->char('nombre_seccion', 1);
             $table->integer('aforo');
             $table->unsignedBigInteger('id_grado');
             $table->foreign('id_grado')->references('id_grado')->on('grados')->onDelete('cascade');
