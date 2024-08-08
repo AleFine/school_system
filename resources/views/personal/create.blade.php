@@ -3,7 +3,7 @@
 @section('contenido')
     <div class="container">
         <h1>Registro Nuevo de Personal</h1>
-        <form method="POST" action="{{ route('personal.store') }}">
+        <form id="personalForm" method="POST" action="{{ route('personal.store') }}">
             @csrf
             <div class="form-group mt-3 mb-3">
                 <label for="nombre_trabajador">Nombre</label>
@@ -70,15 +70,21 @@
             </div>
             <div class="form-group mt-3 mb-3">
                 <label for="departamento">Departamento</label>
-                    <select name="departamento" class="form-control" id="departamento" required>
-                        <option value="">Selecciona un Departamento</option>
-                        @foreach($departamentos as $departamento)
-                            <option value="{{ $departamento->id_departamento }}">{{ $departamento->nombre_departamento }}</option>
-                        @endforeach
-                    </select>
+                <select name="departamento" class="form-control @error('departamento') is-invalid @enderror" id="departamento" required>
+                    <option value="">Selecciona un Departamento</option>
+                    @foreach($departamentos as $departamento)
+                        <option value="{{ $departamento->id_departamento }}">{{ $departamento->nombre_departamento }}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Grabar</button>
             <a href="{{ route('personal.index') }}" class="btn btn-danger"><i class="fas fa-ban"></i> Cancelar</a>
         </form>
     </div>
 @endsection
+
+@section('script')
+
+@endsection
+
+

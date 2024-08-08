@@ -3,9 +3,15 @@
 @section('contenido')
 
 <div class="container">
-    <h3>Lista De Cursos</h3>
-    <h3>Grado: {{$grado->nombre_grado}}</h3>
-    <h3>Nivel: Primaria</h3>
+    <div class="d-flex justify-content-center">
+        <h2 class="fw-bold text-info">Lista de Cursos</h2>
+    </div>
+
+    <div class="d-flex justify-content-between ">
+        <h3 class="fw-bold text-info-emphasis">Grado: {{$grado->nombre_grado}}</h3>
+        <h3 class="fw-bold text-warning">Nivel: Primaria</h3>
+    </div>
+
     <br>
 
     <div id="mensaje">

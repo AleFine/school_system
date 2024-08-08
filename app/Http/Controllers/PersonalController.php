@@ -46,7 +46,7 @@ class PersonalController extends Controller
             'fechaIngreso' => 'required|date',
             'fechaNacimiento' => 'required|date',
             'telefono' => 'required|max:255',
-            'id_departamento' => 'required|exists:departamentos,id_departamento'
+            'departamento' => 'required|exists:departamentos,id_departamento'
         ],
         [
             'nombre_trabajador.required' => 'Ingrese el nombre del trabajador',
@@ -56,14 +56,22 @@ class PersonalController extends Controller
             'fechaIngreso.required' => 'Ingrese la fecha de ingreso',
             'fechaNacimiento.required' => 'Ingrese la fecha de nacimiento',
             'telefono.required' => 'Ingrese el teléfono del trabajador',
-            'id_departamento.required' => 'Seleccione un departamento',
-            'id_departamento.exists' => 'El departamento seleccionado no es válido'
+            'departamento.required' => 'Seleccione un departamento',
+            'departamento.exists' => 'El departamento seleccionado no es válido'
         ]);
         $personal = new Personal();
-        $personal->fill($data);
+        $personal->nombre_trabajador = $request->nombre_trabajador;
+        $personal->apellido_trabajador = $request->apellido_trabajador;
+        $personal->DNI = $request->DNI;
+        $personal->direccion = $request->direccion;
+        $personal->fechaIngreso = $request->fechaIngreso;
+        $personal->fechaNacimiento = $request->fechaNacimiento;
+        $personal->telefono = $request->telefono;
+        $personal->id_departamento = $request->departamento;
+
         $personal->save();
 
-        return redirect()->route('personal.index')->with('datos', 'Registro Nuevo Guardado...!');
+        return redirect()->route('personal.index')->with('datos', 'Personal nuevo creado correctamente');
     }
 
     /**
@@ -96,7 +104,6 @@ class PersonalController extends Controller
             'fechaIngreso' => 'required|date',
             'fechaNacimiento' => 'required|date',
             'telefono' => 'required|max:255',
-            'id_departamento' => 'required|exists:departamentos,id_departamento',
         ],
         [
             'nombre_trabajador.required' => 'Ingrese el nombre del trabajador',
@@ -106,17 +113,19 @@ class PersonalController extends Controller
             'fechaIngreso.required' => 'Ingrese la fecha de ingreso',
             'fechaNacimiento.required' => 'Ingrese la fecha de nacimiento',
             'telefono.required' => 'Ingrese el teléfono del trabajador',
-            'id_departamento.required' => 'Seleccione un departamento',
-            'id_departamento.exists' => 'El departamento seleccionado no es válido',
         ]);
 
         $personal = Personal::findOrFail($id);
 
-        $personal->fill($data);
-        dd($personal);
+        $personal->nombre_trabajador = $request->nombre_trabajador;
+        $personal->apellido_trabajador = $request->apellido_trabajador;
+        $personal->DNI = $request->DNI;
+        $personal->direccion = $request->direccion;
+        $personal->fechaIngreso = $request->fechaIngreso;
+        $personal->fechaNacimiento = $request->fechaNacimiento;
+        $personal->telefono = $request->telefono;
         $personal->save();
-
-        return redirect()->route('personal.index')->with('datos', 'Registro Actualizado...!');
+        return redirect()->route('personal.index')->with('datos', 'Personal actualizado correctamente');
     }
 
     public function confirmar($id){
@@ -130,6 +139,6 @@ class PersonalController extends Controller
 
         $personal->delete();
 
-        return redirect()->route('personal.index')->with('datos', 'Registro Eliminado...!');
+        return redirect()->route('personal.index')->with('datos', 'Personal eliminado correctamente');
     }
 }

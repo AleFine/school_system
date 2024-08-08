@@ -8,18 +8,15 @@
     <form action="{{ route('personal.index') }}" method="GET" class="d-flex justify-content-between align-items-center mb-3">
         <a href="{{ route('personal.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>+ Nuevo Registro</a>
         <div class="d-flex align-items-center">
-            <input name="buscarpor" class="form-control mr-2" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
+            <input name="buscarpor" class="form-control mr-2 mx-3" type="search" placeholder="Buscar por nombre" aria-label="Search" value="{{ $buscarpor }}">
             <button class="btn btn-success" type="submit">Buscar</button>
         </div>
     </form>
 
     <div id="mensaje">
         @if (session('datos'))
-            <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            <div class="alert alert-success" role="alert">
                 {{ session('datos') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
         @endif
     </div>
@@ -46,7 +43,7 @@
                 </tr>
             @else
                 @foreach ($personales as $personal)
-                    <tr>
+                    <tr class="text-sm">
                         <td>{{ $personal->id_trabajador }}</td>
                         <td>{{ $personal->nombre_trabajador }}</td>
                         <td>{{ $personal->apellido_trabajador }}</td>

@@ -50,7 +50,7 @@ class DepartamentoController extends Controller
         $departamento->fill($data);
         $departamento->save();
 
-        return redirect()->route('departamento.index')->with('datos', 'Registro Nuevo Guardado...!');
+        return redirect()->route('departamento.index')->with('datos', 'Departamento nuevo creado correctamente');
     }
 
     /**
@@ -93,7 +93,7 @@ class DepartamentoController extends Controller
         $departamento->descripcion = $request->descripcion;
         $departamento->save();
 
-        return redirect()->route('departamento.index')->with('datos', 'Registro Actualizado...!');
+        return redirect()->route('departamento.index')->with('datos', 'Departamento actualizado correctamente');
     }
 
     /**
@@ -112,6 +112,6 @@ class DepartamentoController extends Controller
 
         $departamento->delete();
 
-        return redirect()->route('departamento.index')->with('datos', 'Registro Eliminado...!');
+        return redirect()->route('departamento.index')->with('datos', 'Departamento eliminado correctamente');
     }
 }

@@ -6,11 +6,11 @@
         <form method="POST" action="{{ route('departamento.update', $departamento->id_departamento) }}">
             @method('put')
             @csrf
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label for="">Código</label>
                 <input type="text" class="form-control" id="id_departamento" name="id_departamento" value="{{ $departamento->id_departamento}}" disabled>
             </div>
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label for="">Nombre de Departamento</label>
                 <input type="text" class="form-control @error('nombre_departamento') is-invalid @enderror" id="nombre_departamento" name="nombre_departamento"
                 value="{{ $departamento->nombre_departamento }}">
@@ -20,7 +20,7 @@
                     </span>
                 @enderror
             </div>
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label for="">Descripcion</label>
                 <input type="text" class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" value="{{ $departamento->descripcion}}">
                 @error('departamento')
