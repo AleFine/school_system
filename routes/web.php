@@ -13,6 +13,7 @@ use App\Http\Controllers\NivelController;
 use App\Http\Controllers\SeccionController;
 use App\Http\Controllers\NotasController;
 use App\Http\Controllers\EstudianteCursoController;
+use App\Http\Controllers\CompetenciaController;
 
 use App\Http\Controllers\EstudianteSeccionController;
 
@@ -80,7 +81,7 @@ Route::prefix('cursos-primaria/{curso}')->group(function () {
     // Ruta para mostrar los detalles de un curso
     Route::get('/detalle', [CursosPrimariaController::class, 'showDetails'])
         ->name('cursos-primaria.details');
-    
+
     // Ruta para mostrar todos los estudiantes en la vista que agrega alumnos a un curso
     Route::get('/agregar-estudiantes', [CursosPrimariaController::class, 'showAddStudents'])
         ->name('cursos-primaria.add-students');
@@ -88,7 +89,7 @@ Route::prefix('cursos-primaria/{curso}')->group(function () {
     // Ruta para manejar la adición de estudiantes a un curso
     Route::post('/agregar-estudiantes', [CursosPrimariaController::class, 'addStudent'])
         ->name('cursos-primaria.store-student');
-    
+
     // Rutas relacionadas con la edición de notas de los estudiantes en un curso específico
     Route::prefix('edit-student')->group(function () {
         // Ruta para mostrar el formulario de edición de notas
@@ -149,7 +150,8 @@ Route::resource('grado-cursos-secundaria', GradoCursoSecundariaController::class
 
 
 
-
+Route::resource('competencias', CompetenciaController::class);
+Route::get('competencias/{id}/confirmar',[CompetenciaController::class,'confirmar'])->name('competencias.confirmar');
 
 
 

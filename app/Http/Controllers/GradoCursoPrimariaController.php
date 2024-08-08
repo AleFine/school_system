@@ -16,7 +16,7 @@ class GradoCursoPrimariaController extends Controller
     public function index(Request $request)
     {
         $todos = Grado::all();
-
+        $grados = collect();
         foreach ($todos as $grado){
             if($grado->id_nivel == 1){
                 $grados[] = $grado;
