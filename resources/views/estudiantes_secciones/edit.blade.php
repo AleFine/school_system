@@ -31,7 +31,7 @@
                 <select name="id_seccion" class="form-control" required>
                     @foreach ($secciones as $seccion)
                         <option value="{{ $seccion->id_seccion }}" {{ $estudiantesSeccion->id_seccion == $seccion->id_seccion ? 'selected' : '' }}>
-                            {{ $seccion->numero_aula }}
+                            {{ $seccion->nombre_seccion }}
                         </option>
                     @endforeach
                 </select>

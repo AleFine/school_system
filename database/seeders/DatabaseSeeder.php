@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
             SeccionSeeder::class,
             DepartamentoSeeder::class,
             UserSeeder::class,
+
+            EstudianteSeeder::class,
+            PersonalSeeder::class,
         ]);
     }
 }

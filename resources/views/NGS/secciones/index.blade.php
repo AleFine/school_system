@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Número de Aula</th>
+                    <th>Sección</th>
                     <th>Aforo</th>
                     <th>Grado</th>
                     <th>Nivel</th>
@@ -34,7 +34,7 @@
                 @foreach ($secciones as $seccion)
                     <tr>
                         <td>{{ $seccion->id_seccion }}</td>
-                        <td>{{ $seccion->numero_aula }}</td>
+                        <td>{{ $seccion->nombre_seccion }}</td>
                         <td>{{ $seccion->aforo }}</td>
                         <td>{{ $seccion->grado->nombre_grado }}</td>
                         <td>{{ $seccion->grado->nivel->nombre_nivel }}</td>

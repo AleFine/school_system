@@ -29,7 +29,7 @@
                 <select name="id_seccion" class="form-control" required>
                     <option value="">Seleccione una sección</option>
                     @foreach ($secciones as $seccion)
-                        <option value="{{ $seccion->id_seccion }}">{{ $seccion->numero_aula }}</option>
+                        <option value="{{ $seccion->id_seccion }}">{{ $seccion->nombre_seccion }}</option>
                     @endforeach
                 </select>
             </div>
