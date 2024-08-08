@@ -20,6 +20,7 @@
             <p><strong>Nivel: </strong>{{ $curso->grado->nivel->nombre_nivel }}</p>
             <p><strong>Grado:</strong> {{ $curso->grado->nombre_grado }}</p>
             <p><strong>Docente:</strong> {{ $curso->trabajador->nombre_trabajador }}, {{ $curso->trabajador->apellido_trabajador }}</p>
+            <p><strong>Departamento: </strong> {{ $curso->trabajador->departamento->nombre_departamento}}</p>
         </div>
     </div>
 
