@@ -13,7 +13,7 @@ class Seccion extends Model
     protected $primaryKey = 'id_seccion';
 
     protected $fillable = [
-        'numero_aula',
+        'nombre_seccion',
         'aforo',
         'id_grado',
     ];

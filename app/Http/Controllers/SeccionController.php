@@ -33,7 +33,7 @@ class SeccionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'numero_aula' => 'required|integer',
+            'nombre_seccion' => ['required', 'regex:/^[A-Z]$/'],
             'aforo' => 'required|integer',
             'id_grado' => 'required|exists:grados,id_grado',
         ]);
@@ -61,7 +61,7 @@ class SeccionController extends Controller
     public function update(Request $request, $id_seccion)
     {
         $request->validate([
-            'numero_aula' => 'required|integer',
+            'nombre_seccion' => ['required', 'regex:/^[A-Z]$/'],
             'aforo' => 'required|integer',
             'id_grado' => 'required|exists:grados,id_grado',
         ]);
