@@ -71,7 +71,7 @@ class PersonalController extends Controller
 
         $personal->save();
 
-        return redirect()->route('personal.index')->with('datos', 'Registro Nuevo Guardado...!');
+        return redirect()->route('personal.index')->with('datos', 'Personal nuevo creado correctamente');
     }
 
     /**
@@ -124,7 +124,7 @@ class PersonalController extends Controller
         dd($personal);
         $personal->save();
 
-        return redirect()->route('personal.index')->with('datos', 'Registro Actualizado...!');
+        return redirect()->route('personal.index')->with('datos', 'Personal actualizado correctamente');
     }
 
     public function confirmar($id){
@@ -138,6 +138,6 @@ class PersonalController extends Controller
 
         $personal->delete();
 
-        return redirect()->route('personal.index')->with('datos', 'Registro Eliminado...!');
+        return redirect()->route('personal.index')->with('datos', 'Personal eliminado correctamente');
     }
 }

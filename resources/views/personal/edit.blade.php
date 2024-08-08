@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Editar Registro de Personal</h1>
         <form method="POST" action="{{ route('personal.update', $personal->id_trabajador) }}">
-            @method('PUT')
+            @method('put')
             @csrf
             <div class="form-group mt-3 mb-3">
                 <label for="">Nombre</label>
