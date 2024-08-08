@@ -6,8 +6,6 @@ use App\Models\Curso;
 use App\Models\EstudianteSeccion;
 use App\Models\Estudiante;
 use App\Models\EstudianteCurso;
-use App\Models\Grado;
-use App\Models\Nivel;
 use App\Models\Seccion;
 use App\Models\Nivel;
 use App\Models\Grado;
@@ -95,13 +93,16 @@ class EstudianteSeccionController extends Controller
     public function edit($id_estudiante, $id_seccion)
     {
         $estudiantesSeccion = EstudianteSeccion::where('id_estudiante', $id_estudiante)
-                                               ->where('id_seccion', $id_seccion)
-                                               ->firstOrFail();
+                                            ->where('id_seccion', $id_seccion)
+                                            ->firstOrFail();
         $estudiantes = Estudiante::all();
-        $grados = Grado::all();
+        $niveles = Nivel::all();
+        $grados = Grado::where('id_nivel', $estudiantesSeccion->seccion->grado->nivel->id_nivel)->get();
         $secciones = Seccion::where('id_grado', $estudiantesSeccion->seccion->id_grado)->get();
-        return view('estudiantes_secciones.edit', compact('estudiantesSeccion', 'estudiantes', 'grados', 'secciones'));
+
+        return view('estudiantes_secciones.edit', compact('estudiantesSeccion', 'estudiantes', 'niveles', 'grados', 'secciones'));
     }
+
 
     public function update(Request $request, $id_estudiante, $id_seccion)
     {
@@ -111,21 +112,26 @@ class EstudianteSeccionController extends Controller
         ]);
 
         $estudiantesSeccion = EstudianteSeccion::where('id_estudiante', $id_estudiante)
-                                               ->where('id_seccion', $id_seccion)
-                                               ->firstOrFail();
+                                            ->where('id_seccion', $id_seccion)
+                                            ->firstOrFail();
 
         $existingAssignment = EstudianteSeccion::where('id_estudiante', $request->id_estudiante)
-                                               ->where('id_seccion', '!=', $id_seccion)
-                                               ->first();
+                                            ->where('id_seccion', '!=', $id_seccion)
+                                            ->first();
         if ($existingAssignment) {
             return redirect()->back()->withErrors(['id_estudiante' => 'El estudiante ya está asignado a otra sección.'])->withInput();
         }
 
-        $estudiantesSeccion->update($request->all());
+        // Actualización de la asignación del estudiante a la sección seleccionada
+        $estudiantesSeccion->update([
+            'id_estudiante' => $request->id_estudiante,
+            'id_seccion' => $request->id_seccion,
+        ]);
 
         return redirect()->route('estudiantes_secciones.index')
-                         ->with('success', 'Asignación actualizada correctamente.');
+                        ->with('success', 'Asignación actualizada correctamente.');
     }
+
 
     public function destroy($id_estudiante, $id_seccion)
     {
@@ -145,10 +151,4 @@ class EstudianteSeccionController extends Controller
         return view('estudiantes_secciones.confirmar', compact('estudiantesSeccion'));
     }
 
-    // Método para obtener secciones por grado
-    public function getSeccionesByGrado($gradoId)
-    {
-        $secciones = Seccion::where('id_grado', $gradoId)->with('grado')->get();
-        return response()->json($secciones);
-    }
 }

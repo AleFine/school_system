@@ -73,13 +73,7 @@
                                 </a>
                             </li>
                           </ul>
-                          <ul class="menu-sub">
-                            <li class="menu-item active">
-                                <a href="{{ route('estudiantes_secciones.index') }}" class="menu-link">
-                                    <div data-i18n="Analytics">Estudiantes Seccion</div>
-                                </a>
-                            </li>
-                          </ul>
+                
                           <ul class="menu-sub">
                               <li class="menu-item active">
                                   <a href="{{ route('nivels.index') }}" class="menu-link">
@@ -155,11 +149,7 @@
                                     </ul>
                                 </ul>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-container.html" class="menu-link">
-                                    <div data-i18n="Container">Operacion 3</div>
-                                </a>
-                            </li>
+                            
                         </ul>
                     </li>
 

@@ -37,18 +37,27 @@ class TercioPrimariaController extends Controller
         $estudiantes_seccion = EstudianteSeccion::all();
         $notas_totales = Notas::all();
 
+        $cursos = [];
         $lista_estudiantes = [];
         $estudiantes = [];
 
         $secciones = Seccion::where('id_grado', $id)->get(); //todas las secciones relacionadas con este grado
-        $cursos = Curso::where('id_grado', $id)->get();
+        $todos_cursos = Curso::all();
+        
+        foreach ($secciones as $secc){
+            foreach($todos_cursos as $cur){
+                if($secc->id_seccion == $cur->id_seccion){
+                    $cursos[]=$cur;
+                }
+            }
+        }
 
         foreach($estudiantes_seccion as $estsec){
             foreach($secciones as $section){
                 if($section->id_seccion == $estsec->id_seccion){
-                    foreach($todos_estudiantes as $estudiante){
-                        if($estudiante->id_estudiante == $estsec->id_estudiante){
-                            $estudiantes[] = $estudiante;
+                    foreach($todos_estudiantes as $estu){
+                        if($estu->id_estudiante == $estsec->id_estudiante){
+                            $estudiantes[] = $estu;
                         }
                     }
                 }
@@ -64,7 +73,7 @@ class TercioPrimariaController extends Controller
             foreach ($estudiantes as $estudiante){
                 $promedio = 0;
                 foreach($notas_totales as $not){
-                    if($not->id_estudiante == $estudiante->id_estudiante){
+                    if($not->id_estudiante == $estudiante->id_estudiante && $not->notaUnidad1 + $not->notaUnidad2 + $not->notaUnidad3>0 ){
                         $promedio +=  ($not->notaUnidad1 + $not->notaUnidad2 + $not->notaUnidad3)/3.0;
                     } #hacemos dos foreach para sumar repetidamente todas las notas de los diferentes cursos
                 }
