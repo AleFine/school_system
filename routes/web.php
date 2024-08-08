@@ -15,6 +15,8 @@ use App\Http\Controllers\NotasController;
 use App\Http\Controllers\EstudianteCursoController;
 use App\Http\Controllers\CompetenciaController;
 use App\Http\Controllers\EstudianteSeccionController;
+use App\Http\Controllers\TercioPrimariaController;
+use App\Http\Controllers\TercioSecundariaController;
 
 
 
@@ -133,6 +135,8 @@ Route::prefix('cursos-secundaria/{curso}')->group(function () {
 });
 
 Route::delete('/estudiante_cursoS/{id_curso}/{id_estudiante}', [NotasController::class, 'destroySecundaria'])->name('estudiante_curso.destroy2');
+Route::get('cursos-primaria/{curso}/detalle/competencias',[CompetenciaController::class,'mostrarCompetencias'])->name('cursos.competencias');
+Route::get('cursos-secundaria/{curso}/detalle/competencias',[CompetenciaController::class,'mostrarCompetencias2'])->name('cursos.competencias2');
 /////////////        FIN    ///////////////////
 
 
@@ -154,7 +158,10 @@ Route::resource('competencias', CompetenciaController::class);
 Route::get('competencias/{id}/confirmar',[CompetenciaController::class,'confirmar'])->name('competencias.confirmar');
 
 
-
+Route::resource('tercio-primaria', TercioPrimariaController::class);
+Route::resource('tercio-secundaria', TercioSecundariaController::class);
+Route::get('tercio-primaria/{id}', [TercioPrimariaController::class, 'show'])->name('tercio.primaria.show');
+Route::get('tercio-secundaria/{id}', [TercioSecundariaController::class, 'show'])->name('tercio.secundaria.show');
 
 
 

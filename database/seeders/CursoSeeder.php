@@ -70,7 +70,10 @@ class CursoSeeder extends Seeder
     private function getRandomTeacherId()
     {
         $teachers = Personal::all();
-        $randomTeacher = $teachers->random();
-        return $randomTeacher->id_trabajador;
+        if ($teachers->isEmpty()) {
+            // Log a warning or handle the case where no teachers are available
+            return null; // or handle appropriately
+        }
+        return $teachers->random()->id_trabajador;
     }
 }

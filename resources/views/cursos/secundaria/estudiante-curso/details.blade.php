@@ -10,6 +10,10 @@
             <i class="fas fa-arrow-left"></i> Volver
         </a>
 
+        <a href="{{ route('cursos.competencias2', $curso->id_curso) }}" class="btn btn-primary me-2">
+            <i class="fas fa-list"></i> Ver competencias
+        </a>
+
         <a href="{{ route('cursos-secundaria.reporte-notas', $curso->id_curso) }}" class="btn btn-warning">
             <i class="fas fa-file-pdf"></i> Generar Reporte de Notas
         </a>
@@ -22,6 +26,7 @@
             <p><strong>Grado:</strong> {{ $curso->seccion->grado->nombre_grado }}</p>
             <p><strong>Seccion:</strong> {{ $curso->seccion->nombre_seccion }}</p>
             <p><strong>Docente:</strong> {{ $curso->trabajador->nombre_trabajador }}, {{ $curso->trabajador->apellido_trabajador }}</p>
+            <p><strong>Departamento: </strong> {{ $curso->trabajador->departamento->nombre_departamento}}</p>
         </div>
     </div>
 
