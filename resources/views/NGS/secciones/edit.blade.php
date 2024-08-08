@@ -17,8 +17,8 @@
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="numero_aula">Número de Aula</label>
-                <input type="text" name="numero_aula" class="form-control" value="{{ $seccion->numero_aula }}" required>
+                <label for="nombre_seccion">Sección</label>
+                <input type="text" name="nombre_seccion" class="form-control" value="{{ $seccion->nombre_seccion }}" required>
             </div>
             <div class="form-group">
                 <label for="aforo">Aforo</label>

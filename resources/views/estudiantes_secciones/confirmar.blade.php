@@ -3,7 +3,7 @@
 @section('contenido')
     <div class="container">
         <h1 class="my-4">Confirmar Eliminación</h1>
-        <p>¿Está seguro de que desea eliminar la asignación del estudiante <strong>{{ $estudiantesSeccion->estudiante->nombre_estudiante }}</strong> a la sección <strong>{{ $estudiantesSeccion->seccion->numero_aula }}</strong>?</p>
+        <p>¿Está seguro de que desea eliminar la asignación del estudiante <strong>{{ $estudiantesSeccion->estudiante->nombre_estudiante }}</strong> a la sección <strong>{{ $estudiantesSeccion->seccion->nombre_seccion }}</strong>?</p>
         <form action="{{ route('estudiantes_secciones.destroy', ['id_estudiante' => $estudiantesSeccion->id_estudiante, 'id_seccion' => $estudiantesSeccion->id_seccion]) }}" method="POST">
             @csrf
             @method('DELETE')

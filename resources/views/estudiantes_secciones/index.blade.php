@@ -32,7 +32,7 @@
                 @forelse ($estudiantesSecciones as $estudiantesSeccion)
                     <tr>
                         <td>{{ $estudiantesSeccion->estudiante->nombre_estudiante }}</td>
-                        <td>{{ $estudiantesSeccion->seccion->numero_aula }}</td>
+                        <td>{{ $estudiantesSeccion->seccion->nombre_seccion }}</td>
                         <td>
                             
                                 <a title="Ver" href="{{ route('estudiantes_secciones.show', ['id_estudiante' => $estudiantesSeccion->estudiante->id_estudiante, 'id_seccion' => $estudiantesSeccion->seccion->id_seccion]) }}">

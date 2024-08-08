@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h5 class="card-title">Estudiante: {{ $estudiantesSeccion->estudiante->nombre_estudiante }}</h5>
                 <p class="card-text"><strong>ID Estudiante:</strong> {{ $estudiantesSeccion->id_estudiante }}</p>
-                <h5 class="card-title mt-4">Sección: {{ $estudiantesSeccion->seccion->numero_aula }}</h5>
+                <h5 class="card-title mt-4">Sección: {{ $estudiantesSeccion->seccion->nombre_seccion }}</h5>
                 <p class="card-text"><strong>ID Sección:</strong> {{ $estudiantesSeccion->id_seccion }}</p>
                 <p class="card-text"><strong>Aforo:</strong> {{ $estudiantesSeccion->seccion->aforo }}</p>
                 <p class="card-text"><strong>Grado:</strong> {{ $estudiantesSeccion->seccion->grado->nombre_grado }}</p>
