@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seccion;
 use App\Models\Grado;
+use App\Models\EstudianteSeccion;
 use Illuminate\Http\Request;
 
 class SeccionController extends Controller
@@ -19,7 +20,7 @@ class SeccionController extends Controller
             });
         }
 
-        $secciones = $query->get();
+        $secciones = $query->with('grado.nivel')->get(); // Incluir el nivel a través del grado
         return view('NGS.secciones.index', compact('secciones'));
     }
 
@@ -46,7 +47,8 @@ class SeccionController extends Controller
     public function show($id_seccion)
     {
         $seccion = Seccion::findOrFail($id_seccion);
-        return view('NGS.secciones.show', compact('seccion'));
+        $estudiantesSeccion = EstudianteSeccion::where('id_seccion', $id_seccion)->get();
+        return view('NGS.secciones.show', compact('seccion', 'estudiantesSeccion'));
     }
 
     public function edit($id_seccion)

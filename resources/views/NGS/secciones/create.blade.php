@@ -28,7 +28,7 @@
                 <select name="id_grado" class="form-control" required>
                     <option value="">Seleccione un grado</option>
                     @foreach ($grados as $grado)
-                        <option value="{{ $grado->id_grado }}">{{ $grado->nombre_grado }}</option>
+                        <option value="{{ $grado->id_grado }}">{{ $grado->nombre_grado }} - {{ $grado->nivel->nombre_nivel }}</option>
                     @endforeach
                 </select>
             </div>
@@ -36,4 +36,3 @@
         </form>
     </div>
 @endsection
-

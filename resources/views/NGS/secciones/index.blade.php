@@ -25,6 +25,8 @@
                     <th>Número de Aula</th>
                     <th>Aforo</th>
                     <th>Grado</th>
+                    <th>Nivel</th>
+                    <th>Turno</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -35,6 +37,8 @@
                         <td>{{ $seccion->numero_aula }}</td>
                         <td>{{ $seccion->aforo }}</td>
                         <td>{{ $seccion->grado->nombre_grado }}</td>
+                        <td>{{ $seccion->grado->nivel->nombre_nivel }}</td>
+                        <td>{{ $seccion->grado->nivel->turno }}</td>
                         <td>
                             <a href="{{ route('secciones.show', $seccion->id_seccion) }}" class="btn btn-info">Ver</a>
                             <a href="{{ route('secciones.edit', $seccion->id_seccion) }}" class="btn btn-warning">Editar</a>

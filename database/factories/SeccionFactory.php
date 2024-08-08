@@ -12,7 +12,7 @@ class SeccionFactory extends Factory
     public function definition()
     {
         return [
-            'numero_aula' => $this->faker->numberBetween(100, 300),
+            'nombre_seccion' => $this->faker->randomElement(['A', 'B', 'C', 'D', 'E']),
             'aforo' => $this->faker->numberBetween(20, 50),
             'id_grado' => function () {
                 return \App\Models\Grado::factory()->create()->id_grado;

@@ -65,9 +65,11 @@ class EstudianteController extends Controller
     public function index(Request $request)
     {
         $buscarpor = $request->get('buscarpor');
-        $estudiantes = Estudiante::where('nombre_estudiante', 'like', '%' . $buscarpor . '%')
-            ->orWhere('apellido_estudiante', 'like', '%' . $buscarpor . '%')
-            ->paginate($this::PAGINATION);
+        $estudiantes = Estudiante::where(function($query) use ($buscarpor) {
+            $query->where('nombre_estudiante', 'like', $buscarpor . '%');
+        })
+        ->paginate($this::PAGINATION);
+        
         return view('estudiantes.index', compact('estudiantes', 'buscarpor'));
     }
 
