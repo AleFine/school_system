@@ -20,16 +20,18 @@
                 <select name="id_estudiante" class="form-control" required>
                     <option value="">Seleccione un estudiante</option>
                     @foreach ($estudiantes as $estudiante)
-                        <option value="{{ $estudiante->id_estudiante }}">{{ $estudiante->nombre_estudiante}}</option>
+                        <option value="{{ $estudiante->id_estudiante }}">{{ $estudiante->nombre_estudiante }} {{ $estudiante->apellido_estudiante }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="id_seccion">Sección</label>
-                <select name="id_seccion" class="form-control" required>
+                <select name="id_seccion" id="id_seccion" class="form-control" required>
                     <option value="">Seleccione una sección</option>
                     @foreach ($secciones as $seccion)
-                        <option value="{{ $seccion->id_seccion }}">{{ $seccion->nombre_seccion }}</option>
+                        <option value="{{ $seccion->id_seccion }}">
+                            {{ $seccion->nombre_seccion }} ({{ $seccion->grado->nombre_grado }} - {{ $seccion->grado->nivel->nombre_nivel }})
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -42,11 +44,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const estudianteSelect = document.querySelector('select[name="id_estudiante"]');
-        const hiddenInput = document.getElementById('id_estudiante_hidden');
+        const seccionSelect = document.getElementById('id_seccion');
 
-        estudianteSelect.addEventListener('change', function () {
-            hiddenInput.value = this.value;
-        });
+        // Puedes agregar funcionalidad adicional aquí si es necesario
     });
 </script>
 @endsection
