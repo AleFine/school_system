@@ -9,22 +9,17 @@ class Competencia extends Model
 {
     use HasFactory;
 
-    protected $table = 'detalle_cursos';
-    protected $primaryKey = 'id';
+    protected $table = 'competencias';
+    protected $primaryKey = 'id_competencia';
+    protected $fillable = ['descripcion'];
 
-    protected $fillable = [
-        'id_curso',
-        'id_competencia',
-        'nro_orden',
-    ];
-
-    public function curso()
+    public function detalleCursos()
     {
-        return $this->belongsTo(Curso::class, 'id_curso');
+        return $this->hasMany(DetalleCurso::class, 'id_competencia', 'id_competencia');
     }
 
-    public function competencia()
+    public function cursos()
     {
-        return $this->belongsTo(Competencia::class, 'id_competencia');
+        return $this->belongsToMany(Curso::class, 'detalle_cursos', 'id_competencia', 'id_curso');
     }
 }

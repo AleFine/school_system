@@ -102,6 +102,13 @@
                               </li>
                           </ul>
                           <ul class="menu-sub">
+                                <li class="menu-item active">
+                                    <a href="{{ route('competencias.index') }}" class="menu-link">
+                                        <div data-i18n="Analytics">Competencias</div>
+                                    </a>
+                                </li>
+                          </ul>
+                          <ul class="menu-sub">
                               <li class="menu-item active">
                                   <a href="{{ route('departamento.index') }}" class="menu-link">
                                       <div data-i18n="Analytics">Departamentos</div>
