@@ -49,6 +49,15 @@ class CompetenciaController extends Controller
 
     }
 
+    public function mostrarCompetencias2($idCurso)
+    {
+        $competencias = DetalleCurso::where('id_curso',$idCurso)->get();
+        $curso = Curso::where('id_curso',$idCurso)->first();
+        //dd($curso);
+        return view('cursos.secundaria.estudiante-curso.competencias',compact('competencias','curso'));
+
+    }
+
     public function edit(Competencia $competencia)
     {
         $cursos = curso::all();

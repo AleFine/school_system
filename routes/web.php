@@ -133,7 +133,8 @@ Route::prefix('cursos-secundaria/{curso}')->group(function () {
 });
 
 Route::delete('/estudiante_cursoS/{id_curso}/{id_estudiante}', [NotasController::class, 'destroySecundaria'])->name('estudiante_curso.destroy2');
-Route::get('cursos-secundaria/{curso}/detalle/competencias',[CompetenciaController::class,'mostrarCompetencias'])->name('cursos.competencias');
+Route::get('cursos-primaria/{curso}/detalle/competencias',[CompetenciaController::class,'mostrarCompetencias'])->name('cursos.competencias');
+Route::get('cursos-secundaria/{curso}/detalle/competencias',[CompetenciaController::class,'mostrarCompetencias2'])->name('cursos.competencias2');
 /////////////        FIN    ///////////////////
 
 
