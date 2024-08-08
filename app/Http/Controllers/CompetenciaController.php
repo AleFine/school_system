@@ -40,9 +40,13 @@ class CompetenciaController extends Controller
         return redirect()->route('competencias.index')->with('success', 'Competencia creada exitosamente.');
     }
 
-    public function show(Competencia $competencia)
+    public function mostrarCompetencias($idCurso)
     {
-        //
+        $competencias = DetalleCurso::where('id_curso',$idCurso)->get();
+        $curso = Curso::where('id_curso',$idCurso)->first();
+        //dd($curso);
+        return view('cursos.primaria.estudiante-curso.competencias',compact('competencias','curso'));
+
     }
 
     public function edit(Competencia $competencia)
