@@ -6,8 +6,8 @@
         @csrf
         <div class="row">
             <div class="form-group my-2">
-                <label for="pgrado" class="my-3">Grados</label>
-                <select name="pgrado" class="form-control" id="pgrado" required>
+                <label for="grado" class="my-3">Grados</label>
+                <select name="grado" class="form-control" id="grado" required>
                     <option value="">Selecciona un Grado</option>
                     @foreach($grados as $grado)
                         <option value="{{ $grado->id_grado }}">{{ $grado->nombre_grado }}</option>
