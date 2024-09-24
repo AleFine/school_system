@@ -26,6 +26,12 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+        <!-- Select2 CSS -->
+    <!-- Enlaces CDN para Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+
 
     <!-- Page CSS -->
 
@@ -59,11 +65,11 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item active open">
+                    <li class="menu-item ">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Dashboards">Dashboards</div>
-                            <div class="badge bg-danger rounded-pill ms-auto">6</div>
+                     
                         </a>
 
                         <ul class="menu-sub">
@@ -148,6 +154,14 @@
                                         </li>
                                     </ul>
                                 </ul>
+                            </li>
+                            
+                        </ul>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('consultas.index') }}" class="menu-link">
+                                    <div data-i18n="Without Menu">Filtar cursos y estudiantes</div>
+                                </a>
                             </li>
                             
                         </ul>

@@ -40,45 +40,45 @@ class EstudianteSeccionController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'id_estudiante' => 'required|exists:estudiantes,id_estudiante',
-        'id_seccion' => 'required|exists:secciones,id_seccion',
-    ]);
-
-    // Validar que el estudiante no esté ya asignado a una sección
-    $existingAssignment = EstudianteSeccion::where('id_estudiante', $request->id_estudiante)
-                                           ->where('id_seccion', $request->id_seccion)
-                                           ->first();
-
-    if ($existingAssignment) {
-        return redirect()->back()->withErrors(['id_estudiante' => 'El estudiante ya está asignado a esta sección.'])->withInput();
-    }
-
-    // Crear la asignación del estudiante a la sección
-    EstudianteSeccion::create([
-        'id_estudiante' => $request->id_estudiante,
-        'id_seccion' => $request->id_seccion,
-    ]);
-
-    // Obtener todos los cursos de la sección seleccionada
-    $cursos = Curso::where('id_seccion', $request->id_seccion)->get();
-
-    // Asignar el estudiante a todos los cursos de la sección
-    foreach ($cursos as $curso) {
-        EstudianteCurso::updateOrCreate([
-            'id_estudiante' => $request->id_estudiante,
-            'id_curso' => $curso->id_curso,
-        ], [
-            'notaUnidad1' => 0,  // Valor por defecto
-            'notaUnidad2' => 0,  // Valor por defecto
-            'notaUnidad3' => 0,  // Valor por defecto
+    {
+        $request->validate([
+            'id_estudiante' => 'required|exists:estudiantes,id_estudiante',
+            'id_seccion' => 'required|exists:secciones,id_seccion',
         ]);
-    }
 
-    return redirect()->route('estudiantes_secciones.index')
-                     ->with('success', 'Estudiante asignado a la sección y cursos correctamente.');
-}
+        // Validar que el estudiante no esté ya asignado a una sección
+        $existingAssignment = EstudianteSeccion::where('id_estudiante', $request->id_estudiante)
+                                            ->where('id_seccion', $request->id_seccion)
+                                                ->first();
+
+        if ($existingAssignment) {
+            return redirect()->back()->withErrors(['id_estudiante' => 'El estudiante ya está asignado a esta sección.'])->withInput();
+        }
+
+        // Crear la asignación del estudiante a la sección
+        EstudianteSeccion::create([
+            'id_estudiante' => $request->id_estudiante,
+            'id_seccion' => $request->id_seccion,
+        ]);
+
+        // Obtener todos los cursos de la sección seleccionada
+        $cursos = Curso::where('id_seccion', $request->id_seccion)->get();
+
+        // Asignar el estudiante a todos los cursos de la sección
+        foreach ($cursos as $curso) {
+            EstudianteCurso::updateOrCreate([
+                'id_estudiante' => $request->id_estudiante,
+                'id_curso' => $curso->id_curso,
+            ], [
+                'notaUnidad1' => 0,  // Valor por defecto
+                'notaUnidad2' => 0,  // Valor por defecto
+                'notaUnidad3' => 0,  // Valor por defecto
+            ]);
+        }
+
+        return redirect()->route('estudiantes_secciones.index')
+                        ->with('success', 'Estudiante asignado a la sección y cursos correctamente.');
+    }
 
 
     public function show($id_estudiante, $id_seccion)

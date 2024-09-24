@@ -17,10 +17,20 @@
         <form action="{{ route('grados.update', $grado->id_grado) }}" method="POST">
             @csrf
             @method('PUT')
+
+            <!-- Campo ID Grado (Deshabilitado) -->
+            <div class="form-group">
+                <label for="id_grado">ID del Grado:</label>
+                <input type="text" class="form-control" id="id_grado" name="id_grado" value="{{ $grado->id_grado }}" disabled>
+            </div>
+
+            <!-- Campo Nombre del Grado -->
             <div class="form-group">
                 <label for="nombre_grado">Nombre del Grado:</label>
                 <input type="text" class="form-control" id="nombre_grado" name="nombre_grado" value="{{ old('nombre_grado', $grado->nombre_grado) }}">
             </div>
+
+            <!-- Campo Nivel -->
             <div class="form-group">
                 <label for="id_nivel">Nivel:</label>
                 <select class="form-control" id="id_nivel" name="id_nivel">
@@ -31,6 +41,8 @@
                     @endforeach
                 </select>
             </div>
+
+            <!-- Botones de acción -->
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             <a href="{{ route('grados.index') }}" class="btn btn-secondary">Cancelar</a>
         </form>

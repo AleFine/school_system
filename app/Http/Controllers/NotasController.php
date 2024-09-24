@@ -57,8 +57,41 @@ class NotasController extends Controller
         $nota->save();
 
         // Redirige con un mensaje de éxito
-        return redirect()->back()
-                        ->with('success', 'Calificaciones actualizadas correctamente');
+        return redirect()->route('cursos-primaria.details', $curso->id_curso)
+                 ->with('success', 'Calificaciones actualizadas correctamente');
+
+    }
+    public function update2(Request $request, Curso $curso, Estudiante $estudiante)
+    {
+        // Valida los datos del request
+        $validatedData = $request->validate([
+            'notaUnidad1' => 'required|integer|min:0|max:20',
+            'notaUnidad2' => 'required|integer|min:0|max:20',
+            'notaUnidad3' => 'required|integer|min:0|max:20',
+        ]);
+
+        // Busca el registro en la tabla Notas
+        $nota = Notas::where('id_curso', $curso->id_curso)
+                    ->where('id_estudiante', $estudiante->id_estudiante)
+                    ->first();
+
+        // Verifica si el registro fue encontrado
+        if (!$nota) {
+            return redirect()->back()->with('error', 'Registro no encontrado');
+        }
+
+        // Actualiza los valores en el registro
+        $nota->notaUnidad1 = $validatedData['notaUnidad1'];
+        $nota->notaUnidad2 = $validatedData['notaUnidad2'];
+        $nota->notaUnidad3 = $validatedData['notaUnidad3'];
+
+        // Guarda los cambios en la base de datos
+        $nota->save();
+
+        // Redirige con un mensaje de éxito
+        return redirect()->route('cursos-secundaria.details', $curso->id_curso)
+                 ->with('success', 'Calificaciones actualizadas correctamente');
+
     }
 
     public function destroyPrimaria($id_curso, $id_estudiante)

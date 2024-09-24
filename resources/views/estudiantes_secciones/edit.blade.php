@@ -4,15 +4,17 @@
 <div class="container">
     <h1>Editar Asignación de Estudiante a Sección</h1>
     <a href="{{ route('estudiantes_secciones.index') }}" class="btn btn-secondary mb-3">Regresar</a>
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
-                    @endforeach
                     <li>{{ $error }}</li>
-                </ul>
-            </div>
-        @endif
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('estudiantes_secciones.update', ['id_estudiante' => $estudiantesSeccion->estudiante->id_estudiante, 'id_seccion' => $estudiantesSeccion->seccion->id_seccion]) }}" method="POST">
         @csrf
         @method('PUT')
@@ -20,15 +22,16 @@
         <!-- Estudiante -->
         <div class="form-group">
             <label for="id_estudiante">Estudiante</label>
-            <select name="id_estudiante" class="form-control" required>
+            <select name="id_estudiante" id="id_estudiante" class="form-control select2" required>
                 <option value="">Seleccione un estudiante</option>
                 @foreach ($estudiantes as $estudiante)
                     <option value="{{ $estudiante->id_estudiante }}" {{ $estudiante->id_estudiante == $estudiantesSeccion->estudiante->id_estudiante ? 'selected' : '' }}>
-                        {{ $estudiante->nombre_estudiante }}
+                        {{ $estudiante->nombre_estudiante }} {{ $estudiante->apellido_estudiante }}
                     </option>
                 @endforeach
             </select>
         </div>
+
 
         <!-- Nivel -->
         <div class="form-group">
@@ -103,9 +106,6 @@
                         gradoSelect.dispatchEvent(new Event('change'));
                     })
                     .catch(error => console.error('Error fetching grados:', error));
-            } else {
-                gradoSelect.innerHTML = '<option value="">Seleccione un grado</option>';
-                seccionSelect.innerHTML = '<option value="">Seleccione una sección</option>';
             }
         });
 
@@ -129,8 +129,6 @@
                         });
                     })
                     .catch(error => console.error('Error fetching secciones:', error));
-            } else {
-                seccionSelect.innerHTML = '<option value="">Seleccione una sección</option>';
             }
         });
 
@@ -140,4 +138,15 @@
         }
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('#id_estudiante').select2({
+            placeholder: "Seleccione un estudiante",
+            allowClear: true,
+            width: '100%' // Asegúrate de que el select2 tome todo el ancho del contenedor
+        });
+    });
+</script>
+
 @endsection

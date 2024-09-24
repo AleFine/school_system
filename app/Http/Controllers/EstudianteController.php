@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
+use App\Models\Pais;
+use App\Models\Region;
+use App\Models\Ciudad;
+use App\Models\Distrito;
 use Illuminate\Http\Request;
 
 class EstudianteController extends Controller
@@ -75,7 +79,8 @@ class EstudianteController extends Controller
 
     public function create()
     {
-        return view('estudiantes.create');
+        $paises = Pais::all();
+        return view('estudiantes.create',compact('paises'));
     }
 
     public function store(Request $request)
@@ -92,7 +97,7 @@ class EstudianteController extends Controller
                 'ciudad' => 'required|max:50',
                 'distrito' => 'required|max:50',
                 'estado_civil' => 'required|max:15',
-                'telefono' => 'required|max:15'
+                'telefono' => ['required', 'regex:/^9\d{8}$/'],
             ],
             [
                 'nombre_estudiante.required' => 'Ingrese nombre del estudiante',
@@ -116,7 +121,7 @@ class EstudianteController extends Controller
                 'ciudad.max' => 'Máximo 50 caracteres para la ciudad',
                 'distrito.max' => 'Máximo 50 caracteres para el distrito',
                 'estado_civil.max' => 'Máximo 15 caracteres para el estado civil',
-                'telefono.max' => 'Máximo 15 caracteres para el teléfono'
+                'telefono.max' => 'Máximo 9 caracteres para el teléfono'
             ]
         );
 
@@ -136,4 +141,23 @@ class EstudianteController extends Controller
         $estudiante->delete();
         return redirect()->route('estudiantes.index')->with('datos', 'Registro Eliminado...!');
     }
+
+    public function getRegiones(Request $request)
+    {
+        $regiones = Region::where('pais_id', $request->pais_id)->get();
+        return response()->json($regiones);
+    }
+
+    public function getCiudades(Request $request)
+    {
+        $ciudades = Ciudad::where('region_id', $request->region_id)->get();
+        return response()->json($ciudades);
+    }
+
+    public function getDistritos(Request $request)
+    {
+        $distritos = Distrito::where('ciudad_id', $request->ciudad_id)->get();
+        return response()->json($distritos);
+    }
+
 }

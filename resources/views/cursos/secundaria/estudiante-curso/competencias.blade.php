@@ -15,8 +15,9 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h3 class="card-title">Curso: {{ $curso->nombre_curso }}</h3>
-                <p><strong>Nivel: </strong>{{ $curso->grado->nivel->nombre_nivel }}</p>
-                <p><strong>Grado: </strong> {{ $curso->grado->nombre_grado }}</p>
+                <p><strong>Nivel: </strong>{{ $curso->seccion->grado->nivel->nombre_nivel}}</p>
+                <p><strong>Grado: </strong>{{ $curso->seccion->grado->nombre_grado}}</p>
+                <p><strong>Sección: </strong>{{ $curso->seccion->nombre_seccion }}</p>
                 <p><strong>Docente: </strong> {{ $curso->trabajador->nombre_trabajador }}, {{ $curso->trabajador->apellido_trabajador }}</p>
             </div>
         </div>
