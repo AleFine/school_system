@@ -36,6 +36,12 @@ use App\Http\Controllers\GradoCursoSecundariaController;
 |
 */
 
+use App\Http\Controllers\ConsultaController;
+
+Route::get('/consultas', [ConsultaController::class, 'index'])->name('consultas.index');
+Route::get('/consultas/filter', [ConsultaController::class, 'filter'])->name('consultas.filter');
+
+
 Route::get('/', [AuthController::class, 'dashboard'])->name('jejeje');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
@@ -129,7 +135,7 @@ Route::prefix('cursos-secundaria/{curso}')->group(function () {
             ->name('cursos-secundaria.edit-student');
 
         // Ruta para actualizar las notas de un estudiante en un curso secundario
-        Route::put('update-student/{estudiante}', [NotasController::class, 'update'])
+        Route::put('update-student/{estudiante}', [NotasController::class, 'update2'])
             ->name('cursos-secundaria.update-student');
     });
 });
@@ -217,3 +223,6 @@ Route::get('estudiantes_secciones/{id_estudiante}/{id_seccion}', [EstudianteSecc
 Route::get('estudiantes_secciones/{id_estudiante}/{id_seccion}/edit', [EstudianteSeccionController::class, 'edit'])->name('estudiantes_secciones.edit');
 Route::put('estudiantes_secciones/{id_estudiante}/{id_seccion}', [EstudianteSeccionController::class, 'update'])->name('estudiantes_secciones.update');
 
+Route::get('/get-regiones', [EstudianteController::class, 'getRegiones'])->name('getRegiones');
+Route::get('/get-ciudades', [EstudianteController::class, 'getCiudades'])->name('getCiudades');
+Route::get('/get-distritos', [EstudianteController::class, 'getDistritos'])->name('getDistritos');

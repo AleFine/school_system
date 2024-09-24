@@ -43,8 +43,8 @@
                 <!-- Grado (filtrado por nivel Primaria) -->
                 <div class="form-group">
                     <label for="id_grado">Grado</label>
-                    <select name="id_grado" class="form-control" id="grado" required>
-                        <option value="">Selecciona un Grado</option>
+                    <select name="id_grado" id="id_grado" class="form-control" required>
+                        <option value="" disabled {{ is_null($curso->id_grado) ? 'selected' : '' }}>Selecciona un Grado</option>
                         @foreach($grados as $grado)
                             <option value="{{ $grado->id_grado }}" {{ $grado->id_grado == old('id_grado', $curso->id_grado) ? 'selected' : '' }}>
                                 {{ $grado->nombre_grado }}
@@ -101,7 +101,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const gradoSelect = document.getElementById('grado');
+        const gradoSelect = document.getElementById('id_grado');
         const seccionSelect = document.getElementById('seccion');
         const departamentoSelect = document.getElementById('departamento');
         const trabajadorSelect = document.getElementById('trabajador');

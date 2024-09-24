@@ -19,13 +19,18 @@
         <!-- Estudiante -->
         <div class="form-group">
             <label for="id_estudiante">Estudiante</label>
-            <select name="id_estudiante" class="form-control" required>
-                <option value="">Seleccione un estudiante</option>
+            <input list="estudiantes_list" id="id_estudiante" name="id_estudiante_display" class="form-control" autocomplete="off" required>
+            <datalist id="estudiantes_list">
                 @foreach ($estudiantes as $estudiante)
-                    <option value="{{ $estudiante->id_estudiante }}">{{ $estudiante->nombre_estudiante }}</option>
+                    <option value="{{ $estudiante->nombre_estudiante }} {{ $estudiante->apellido_estudiante }}" data-id="{{ $estudiante->id_estudiante }}">
                 @endforeach
-            </select>
+            </datalist>
+            <!-- Este campo oculto enviará el ID real del estudiante -->
+            <input type="hidden" name="id_estudiante" id="id_estudiante_real" required>
         </div>
+
+
+
 
         <!-- Nivel -->
         <div class="form-group">
@@ -117,4 +122,39 @@
 });
 
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputEstudiante = document.getElementById('id_estudiante');
+        const hiddenInput = document.getElementById('id_estudiante_real');
+        const datalist = document.getElementById('estudiantes_list');
+
+        inputEstudiante.addEventListener('input', function() {
+            const options = datalist.options;
+            const value = inputEstudiante.value;
+            let selectedId = '';
+
+            // Buscar el id del estudiante seleccionado
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].value === value) {
+                    selectedId = options[i].getAttribute('data-id');
+                    break;
+                }
+            }
+
+            // Asignar el id al input hidden
+            hiddenInput.value = selectedId;
+        });
+
+        // Verificar que el input sea válido al salir del campo
+        inputEstudiante.addEventListener('blur', function() {
+            if (!hiddenInput.value) {
+                inputEstudiante.value = '';
+            }
+        });
+    });
+</script>
+
+
+
 @endsection

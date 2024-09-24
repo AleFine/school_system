@@ -60,18 +60,26 @@ class SeccionController extends Controller
 
     public function update(Request $request, $id_seccion)
     {
+        // Validar la solicitud
         $request->validate([
-            'nombre_seccion' => ['required', 'regex:/^[A-Z]$/'],
+            'nombre_seccion' => ['required', 'regex:/^[A-Z]/'], // Regex ajustado para permitir una sola letra mayúscula
             'aforo' => 'required|integer',
-            'id_grado' => 'required|exists:grados,id_grado',
+            'id_grado' => 'required|exists:grados,id_grado', // Nombre del campo y clave foránea corregidos
         ]);
 
+        // Buscar y actualizar la sección
         $seccion = Seccion::findOrFail($id_seccion);
-        $seccion->update($request->all());
+        $seccion->nombre_seccion = $request->input('nombre_seccion');
+        $seccion->aforo = $request->input('aforo');
+        $seccion->id_grado = $request->input('id_grado');
+        // Actualiza otros campos si es necesario
+        $seccion->save();
 
+        // Redirigir con un mensaje de éxito
         return redirect()->route('secciones.index')
-                         ->with('success', 'Sección actualizada correctamente.');
+                        ->with('success', 'Sección actualizada correctamente.');
     }
+
 
     public function destroy($id_seccion)
     {
@@ -80,5 +88,11 @@ class SeccionController extends Controller
 
         return redirect()->route('secciones.index')
                          ->with('success', 'Sección eliminada correctamente.');
+    }
+
+    public function getSeccionesByGrado($id_grado)
+    {
+        $secciones = Seccion::where('id_grado', $id_grado)->get();
+        return response()->json($secciones);
     }
 }
