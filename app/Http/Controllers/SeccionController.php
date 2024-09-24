@@ -81,4 +81,11 @@ class SeccionController extends Controller
         return redirect()->route('secciones.index')
                          ->with('success', 'Sección eliminada correctamente.');
     }
+
+    public function getSeccionesByGrado($id_grado)
+    {
+        $secciones = Seccion::where('id_grado', $id_grado)->get();
+        return response()->json($secciones);
+    }
+
 }
