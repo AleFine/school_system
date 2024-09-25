@@ -48,7 +48,8 @@ class SeccionController extends Controller
     {
         $seccion = Seccion::findOrFail($id_seccion);
         $estudiantesSeccion = EstudianteSeccion::where('id_seccion', $id_seccion)->get();
-        return view('NGS.secciones.show', compact('seccion', 'estudiantesSeccion'));
+        $numEstudiantes = EstudianteSeccion::where('id_seccion', $id_seccion)->count();
+        return view('NGS.secciones.show', compact('seccion', 'estudiantesSeccion','numEstudiantes'));
     }
 
     public function edit($id_seccion)

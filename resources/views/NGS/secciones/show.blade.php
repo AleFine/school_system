@@ -8,11 +8,15 @@
             <div class="card-body">
                 <h5 class="card-title">ID: {{ $seccion->id_seccion }}</h5>
                 <p class="card-text"><strong>Sección:</strong> {{ $seccion->nombre_seccion }}</p>
-                <p class="card-text"><strong>Aforo:</strong> {{ $seccion->aforo }}</p>
+                <p class="card-text">
+                    <strong>Estudiantes Asignados:</strong>  {{ $numEstudiantes }}
+                </p>
+                <p class="card-text">
+                    <strong>Aforo:</strong>  {{ $seccion->aforo }}
+                </p>
                 <p class="card-text"><strong>Grado:</strong> {{ $seccion->grado->nombre_grado }}</p>
                 <a href="{{ route('secciones.edit', $seccion->id_seccion) }}" class="btn btn-warning">Editar</a>
-                <form action="{{ route('secciones.destroy', $seccion->id_seccion) }}" method="POST"
-                    style="display:inline;">
+                <form action="{{ route('secciones.destroy', $seccion->id_seccion) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -37,8 +41,7 @@
                         <td>
                             <a href="{{ route('estudiantes_secciones.edit', ['id_estudiante' => $es->id_estudiante, 'id_seccion' => $es->id_seccion]) }}"
                                 class="btn btn-warning">Editar Sección</a>
-                            <form
-                                action="{{ route('estudiantes_secciones.destroy', ['id_estudiante' => $es->id_estudiante, 'id_seccion' => $es->id_seccion]) }}"
+                            <form action="{{ route('estudiantes_secciones.destroy', ['id_estudiante' => $es->id_estudiante, 'id_seccion' => $es->id_seccion]) }}"
                                 method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
