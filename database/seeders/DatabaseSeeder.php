@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             EstudianteSeeder::class,
             PersonalSeeder::class,
             CursoSeeder::class,
+            RegionesSeeder::class
         ]);
     }
 }

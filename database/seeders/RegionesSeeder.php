@@ -7,6 +7,7 @@ use App\Models\Pais;
 use App\Models\Region;
 use App\Models\Ciudad;
 use App\Models\Distrito;
+use Illuminate\Support\Facades\File;
 
 class RegionesSeeder extends Seeder
 {
@@ -17,84 +18,52 @@ class RegionesSeeder extends Seeder
      */
     public function run()
     {
-        // 1. Crear un país (opcional, si no tienes países predefinidos)
-        $pais = Pais::create([
-            'nombre' => 'Perú',
-            'codigo_iso'=>'PER'
-        ]);
+        // 1. Crear el país "Perú" (si no existe)
+        $pais = Pais::firstOrCreate(
+            ['nombre' => 'Perú'],
+            ['codigo_iso' => 'PER']
+        );
 
-        // 2. Crear una región en ese país
-        $region = Region::create([
-            'nombre' => ' La libertad',
-            'pais_id' => $pais->id
-        ]);
+        // 2. Leer y cargar el JSON de departamentos
+        $departmentsData = File::get(database_path('seeders/json/departments.json'));
+        $departments = json_decode($departmentsData, true);
 
-        // 3. Crear ciudades en esa región
-        $ciudad1 = Ciudad::create([
-            'nombre' => 'Trujillo',
-            'region_id' => $region->id
-        ]);
+        foreach ($departments as $department) {
+            // Crear o encontrar la región (departamento)
+            $region = Region::firstOrCreate([
+                'nombre' => $department['name'],
+                'pais_id' => $pais->id
+            ]);
 
-        $ciudad2 = Ciudad::create([
-            'nombre' => 'Pataz',
-            'region_id' => $region->id
-        ]);
+            // 3. Leer y cargar el JSON de provincias
+            $provincesData = File::get(database_path('seeders/json/provinces.json'));
+            $provinces = json_decode($provincesData, true);
 
-        // 4. Crear distritos para la Ciudad 1
-        Distrito::create([
-            'nombre' => 'La Esperanza',
-            'ciudad_id' => $ciudad1->id
-        ]);
+            foreach ($provinces as $province) {
+                // Verificar que la provincia corresponda al departamento actual
+                if ($province['department_id'] === $department['id']) {
+                    // Crear o encontrar la ciudad (provincia)
+                    $ciudad = Ciudad::firstOrCreate([
+                        'nombre' => $province['name'],
+                        'region_id' => $region->id
+                    ]);
 
-        Distrito::create([
-            'nombre' => 'El Porvenir',
-            'ciudad_id' => $ciudad1->id
-        ]);
+                    // 4. Leer y cargar el JSON de distritos
+                    $districtsData = File::get(database_path('seeders/json/districts.json'));
+                    $districts = json_decode($districtsData, true);
 
-        // 5. Crear distritos para la Ciudad 2
-        Distrito::create([
-            'nombre' => 'Vista Florida',
-            'ciudad_id' => $ciudad2->id
-        ]);
-
-        Distrito::create([
-            'nombre' => 'La Coyona',
-            'ciudad_id' => $ciudad2->id
-        ]);
-
-
-
-        $region2 = Region::create([
-            'nombre' => ' Lima',
-            'pais_id' => $pais->id
-        ]);
-
-        // 3. Crear ciudades en esa región
-        $ciudad3 = Ciudad::create([
-            'nombre' => 'La Victoria',
-            'region_id' => $region2->id
-        ]);
-
-        $ciudad4 = Ciudad::create([
-            'nombre' => 'Ate',
-            'region_id' => $region2->id
-        ]);
-
-        // 4. Crear distritos para la Ciudad 1
-        Distrito::create([
-            'nombre' => 'Vitarte',
-            'ciudad_id' => $ciudad4->id
-        ]);
-
-        Distrito::create([
-            'nombre' => 'Santa Clara',
-            'ciudad_id' => $ciudad4->id
-        ]);
-
-        // 5. Crear distritos para la Ciudad 2
-        Distrito::create([
-            'nombre' => 'Unidad vecinal Matute',
-            'ciudad_id' => $ciudad3->id
-        ]);
+                    foreach ($districts as $district) {
+                        // Verificar que el distrito corresponda a la provincia actual
+                        if ($district['province_id'] === $province['id']) {
+                            // Crear o encontrar el distrito
+                            Distrito::firstOrCreate([
+                                'nombre' => $district['name'],
+                                'ciudad_id' => $ciudad->id
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
