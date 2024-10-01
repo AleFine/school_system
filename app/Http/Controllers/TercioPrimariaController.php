@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Curso;
 use App\Models\Grado;
 use App\Models\EstudianteSeccion;
-use App\Models\Estudiante;
 use App\Models\Notas;
 use App\Models\Seccion;
 
@@ -37,21 +35,21 @@ class TercioPrimariaController extends Controller
             }
         } //obtenemos todos los estudiantes relacionados al grado
 
-        //dd($estudiantes);
+        $todas_notas = Notas::all();
 
         foreach ($estudiantes as $estudiante) {
             $nota_curso = 0;
-            $estudiante_cursos = Notas::where('id_estudiante',$estudiante->id_estudiante);
-            dd($estudiante_cursos);
-            foreach ($estudiante_cursos as $e) {
-                $nota_curso += ($e->notaUnidad1 + $e->notaUnidad2 + $e->notaUnidad3) / 3;
+            $cantidad = 0;
+            foreach ($todas_notas as $note) {
+                if ($note->id_estudiante == $estudiante->id_estudiante) {
+                    $nota_curso += ($note->notaUnidad1 + $note->notaUnidad2 + $note->notaUnidad3) / 3;
+                    $cantidad += 1;
+                }
             }
-            $notafinal = $nota_curso/ 6;
-            $lista_estudiantes[] = new Nota_Estudiante($estudiante->id_estudiante, $estudiante->nombre_estudiante.' '.$estudiante->apellido_estudiante, $notafinal);
+
+            $notafinal = $nota_curso / $cantidad;
+            $lista_estudiantes[] = new Nota_Estudiante($estudiante->id_estudiante, $estudiante->nombre_estudiante . ' ' . $estudiante->apellido_estudiante, $notafinal);
         }
-
-        //dd($lista_estudiantes);
-
 
         usort($lista_estudiantes, function($a, $b) {
                 return $b->getNota() - $a->getNota();
