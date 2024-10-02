@@ -18,13 +18,11 @@ class RegionesSeeder extends Seeder
      */
     public function run()
     {
-        // 1. Crear el país "Perú" (si no existe)
         $pais = Pais::firstOrCreate(
             ['nombre' => 'Perú'],
             ['codigo_iso' => 'PER']
         );
 
-        // 2. Leer y cargar el JSON de departamentos
         $departmentsData = File::get(database_path('seeders/json/departments.json'));
         $departments = json_decode($departmentsData, true);
 
@@ -35,7 +33,7 @@ class RegionesSeeder extends Seeder
                 'pais_id' => $pais->id
             ]);
 
-            // 3. Leer y cargar el JSON de provincias
+            // Leer y cargar el JSON de provincias
             $provincesData = File::get(database_path('seeders/json/provinces.json'));
             $provinces = json_decode($provincesData, true);
 
@@ -48,7 +46,7 @@ class RegionesSeeder extends Seeder
                         'region_id' => $region->id
                     ]);
 
-                    // 4. Leer y cargar el JSON de distritos
+                    // Leer y cargar el JSON de distritos
                     $districtsData = File::get(database_path('seeders/json/districts.json'));
                     $districts = json_decode($districtsData, true);
 
