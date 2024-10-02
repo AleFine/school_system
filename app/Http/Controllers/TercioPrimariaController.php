@@ -46,7 +46,6 @@ class TercioPrimariaController extends Controller
                     $cantidad += 1;
                 }
             }
-
             $notafinal = $nota_curso / $cantidad;
             $lista_estudiantes[] = new Nota_Estudiante($estudiante->id_estudiante, $estudiante->nombre_estudiante . ' ' . $estudiante->apellido_estudiante, $notafinal);
         }

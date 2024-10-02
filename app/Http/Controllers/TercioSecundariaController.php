@@ -59,7 +59,6 @@ class TercioSecundariaController extends Controller
             $notafinal = $nota_curso / $cantidad;
             $lista_estudiantes[] = new Nota_Estudiante($estudiante->id_estudiante, $estudiante->nombre_estudiante . ' ' . $estudiante->apellido_estudiante, $notafinal);
         }
-
         usort($lista_estudiantes, function($a, $b) {
                 return $b->getNota() - $a->getNota();
             });
