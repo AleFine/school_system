@@ -28,7 +28,7 @@
     <table class="table table-sm mb-3">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Nombre del Curso</th>
+                <th scope="col">Curso, Grado y Seccion</th>
                 <th scope="col">Datos del Docente</th>
 
             </tr>

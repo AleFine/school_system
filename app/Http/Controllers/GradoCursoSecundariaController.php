@@ -8,6 +8,7 @@ use App\Models\Grado;
 
 use App\Models\Personal;
 use App\Models\Curso;
+use App\Models\Seccion;
 
 class GradoCursoSecundariaController extends Controller
 {
@@ -16,13 +17,7 @@ class GradoCursoSecundariaController extends Controller
      */
     public function index()
     {
-        $todos = Grado::all();
-        $grados = collect();
-        foreach ($todos as $grado){
-            if($grado->id_nivel == 2){
-                $grados[] = $grado;
-            }
-        }
+        $grados = Grado::where('id_nivel', 2)->get();
 
         return view('grado.secundaria.confirmar', compact('grados'));
     }
@@ -48,14 +43,19 @@ class GradoCursoSecundariaController extends Controller
      */
     public function show(int $id)
     {
-        $cursos = collect();
 
-        $todos = Curso::all();
-        foreach($todos as $curso){
-            if($curso->id_grado == $id){
-                $cursos[] = $curso;
+        $todos_cursos = Curso::all();
+
+        $secciones = Seccion::where("id_grado",$id)->get();
+
+        foreach ($todos_cursos as $curso){
+            foreach ($secciones as $secc){
+                if($secc->id_seccion == $curso->id_seccion){
+                    $cursos[]=$curso;
+                }
             }
         }
+
         $grado = Grado::findOrFail($id);
 
         $personales = Personal::all();
