@@ -25,6 +25,7 @@
                 <tr>
                     <th>Estudiante</th>
                     <th>Sección</th>
+                    <th>Aforo</th>
                     <th>Grado</th>
                     <th>Nivel</th>
                     <th>Acciones</th>
@@ -35,6 +36,7 @@
                     <tr>
                         <td>{{ $estudiantesSeccion->estudiante->nombre_estudiante }}</td>
                         <td>{{ $estudiantesSeccion->seccion->nombre_seccion }}</td>
+                        <td>{{ $estudiantesSeccion->seccion->aforo }}</td>
                         <td>{{ $estudiantesSeccion->seccion->grado->nombre_grado }}</td>
                         <td>{{ $estudiantesSeccion->seccion->grado->nivel->nombre_nivel }}</td>
                         <td>

@@ -46,39 +46,43 @@ class EstudianteSeccionController extends Controller
             'id_seccion' => 'required|exists:secciones,id_seccion',
         ]);
 
-        // Validar que el estudiante no esté ya asignado a una sección
+        $seccion = Seccion::findOrFail($request->id_seccion);
+
+        $numEstudiantesAsignados = EstudianteSeccion::where('id_seccion', $request->id_seccion)->count();
+
+        if ($numEstudiantesAsignados >= $seccion->aforo) {
+            return redirect()->back()->withErrors(['id_seccion' => 'El aforo de la sección ha sido alcanzado.'])->withInput();
+        }
+
         $existingAssignment = EstudianteSeccion::where('id_estudiante', $request->id_estudiante)
                                             ->where('id_seccion', $request->id_seccion)
-                                                ->first();
+                                            ->first();
 
         if ($existingAssignment) {
             return redirect()->back()->withErrors(['id_estudiante' => 'El estudiante ya está asignado a esta sección.'])->withInput();
         }
 
-        // Crear la asignación del estudiante a la sección
         EstudianteSeccion::create([
             'id_estudiante' => $request->id_estudiante,
             'id_seccion' => $request->id_seccion,
         ]);
 
-        // Obtener todos los cursos de la sección seleccionada
         $cursos = Curso::where('id_seccion', $request->id_seccion)->get();
-
-        // Asignar el estudiante a todos los cursos de la sección
         foreach ($cursos as $curso) {
             EstudianteCurso::updateOrCreate([
                 'id_estudiante' => $request->id_estudiante,
                 'id_curso' => $curso->id_curso,
             ], [
-                'notaUnidad1' => 0,  // Valor por defecto
-                'notaUnidad2' => 0,  // Valor por defecto
-                'notaUnidad3' => 0,  // Valor por defecto
+                'notaUnidad1' => 0,
+                'notaUnidad2' => 0,
+                'notaUnidad3' => 0,
             ]);
         }
 
         return redirect()->route('estudiantes_secciones.index')
                         ->with('success', 'Estudiante asignado a la sección y cursos correctamente.');
     }
+
 
 
     public function show($id_estudiante, $id_seccion)

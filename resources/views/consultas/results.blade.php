@@ -7,7 +7,22 @@
     <h3>Grado: {{ $grado->nombre_grado }}</h3>
     <h3>Sección: {{ $seccion->nombre_seccion }}</h3>
 
-    <!-- Cursos Table -->
+    <!-- Información de Aforo -->
+    <div class="mt-4 mb-4">
+        <h4>Capacidad de la Sección:</h4>
+        <div class="alert {{ $numEstudiantesAsignados >= $aforo ? 'alert-danger' : 'alert-info' }}">
+            <strong>Estudiantes Asignados: </strong> {{ $numEstudiantesAsignados }} / {{ $aforo }}
+            @if ($numEstudiantesAsignados >= $aforo)
+                <p class="mb-0"><strong>¡Advertencia!</strong> La sección ha alcanzado el aforo máximo.</p>
+            @elseif ($aforo - $numEstudiantesAsignados <= 5)
+                <p class="mb-0"><strong>¡Atención!</strong> Solo quedan {{ $aforo - $numEstudiantesAsignados }} espacios disponibles.</p>
+            @else
+                <p class="mb-0">Aún hay espacio disponible en esta sección.</p>
+            @endif
+        </div>
+    </div>
+
+    <!-- Tabla de Cursos -->
     <div class="table-responsive mb-4">
         <h4>Cursos:</h4>
         @if($cursos && $cursos->count() > 0)
@@ -21,7 +36,7 @@
                 <tbody>
                     @foreach($cursos as $curso)
                         <tr>
-                            <th>{{ $curso->id_curso }}</th>
+                            <td>{{ $curso->id_curso }}</td>
                             <td>{{ $curso->nombre_curso }}</td>
                         </tr>
                     @endforeach
@@ -32,7 +47,7 @@
         @endif
     </div>
 
-    <!-- Estudiantes Table -->
+    <!-- Tabla de Estudiantes -->
     <div class="table-responsive">
         <h4>Estudiantes:</h4>
         @if($estudiantes && $estudiantes->count() > 0)
@@ -47,7 +62,7 @@
                 <tbody>
                     @foreach($estudiantes as $estudiante)
                         <tr>
-                            <th>{{ $estudiante->estudiante->DNI }}</th>
+                            <td>{{ $estudiante->estudiante->DNI }}</td>
                             <td>{{ $estudiante->estudiante->nombre_estudiante }}</td>
                             <td>{{ $estudiante->estudiante->apellido_estudiante }}</td>
                         </tr>
