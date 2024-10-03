@@ -15,14 +15,14 @@
     <br>
 
     <table class="table table-sm mb-3">
-        <thead class="thead-dark">
+        <thead class="thead-dark text-center">
             <tr>
                 <th scope="col">Puesto</th>
                 <th scope="col">Nombre de Estudiante</th>
                 <th scope="col">Promedio General</th>
             </tr>
         </thead>
-        <tbody style="font-size: 14x;"> <!-- Reducir tamaño de fuente -->
+        <tbody class="text-center"  style="font-size: 14x;"> <!-- Reducir tamaño de fuente -->
             @php
                 $i = 1;
             @endphp
@@ -36,7 +36,7 @@
                         @if ($est->nota>=16)
                             <td>{{$i}}</td>
                             <td>{{$est->nombre}}</td>
-                            <td>{{$est->nota}}</td>
+                            <td>{{number_format($est->nota, 2)}}</td>
                             @php
                                 $i++;
                             @endphp

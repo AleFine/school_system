@@ -61,7 +61,7 @@ class TercioSecundariaController extends Controller
             $lista_estudiantes[] = new Nota_Estudiante($estudiante->id_estudiante, $estudiante->nombre_estudiante . ' ' . $estudiante->apellido_estudiante, $notafinal);
         }
 
-        $this->ordener($lista_estudiantes,$lista_estudiantes->length());
+        $this->ordener($lista_estudiantes,count($lista_estudiantes));
 
         $grade = Grado::findOrFail($id); #pasamos el grado a la vista
 
