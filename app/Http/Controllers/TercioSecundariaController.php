@@ -33,6 +33,7 @@ class TercioSecundariaController extends Controller
      */
     public function show(string $id) #el parametro es el id_delgrado
     {
+        $estudiantes = [];
         $estudiantes_secciones = EstudianteSeccion::all();
 
         $secciones = Seccion::where('id_grado', $id)->get();
@@ -59,9 +60,8 @@ class TercioSecundariaController extends Controller
             $notafinal = $nota_curso / $cantidad;
             $lista_estudiantes[] = new Nota_Estudiante($estudiante->id_estudiante, $estudiante->nombre_estudiante . ' ' . $estudiante->apellido_estudiante, $notafinal);
         }
-        usort($lista_estudiantes, function($a, $b) {
-                return $b->getNota() - $a->getNota();
-            });
+
+        $this->ordener($lista_estudiantes,$lista_estudiantes->length());
 
         $grade = Grado::findOrFail($id); #pasamos el grado a la vista
 
@@ -82,6 +82,18 @@ class TercioSecundariaController extends Controller
     public function update(Request $request, string $id)
     {
         //
+    }
+
+    public function ordener(&$lista,$n){
+        for ($i = 0; $i < $n - 1 ; $i++) {
+            for ($j = $n-1; $j > $i; $j--) {
+                if ($lista[$j]->getNota() > $lista[$j - 1]->getNota()) {
+                    $temp = $lista[$j];
+                    $lista[$j] = $lista[$j - 1];
+                    $lista[$j - 1] = $temp;
+                }
+            }
+        }
     }
 
     /**

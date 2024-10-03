@@ -24,6 +24,7 @@ class TercioPrimariaController extends Controller
      */
     public function show(string $id) #el parametro es el id_delgrado
     {
+        $estudiantes = [];
         $estudiantes_secciones = EstudianteSeccion::all();
 
         $secciones = Seccion::where('id_grado', $id)->get();
@@ -50,11 +51,9 @@ class TercioPrimariaController extends Controller
             $lista_estudiantes[] = new Nota_Estudiante($estudiante->id_estudiante, $estudiante->nombre_estudiante . ' ' . $estudiante->apellido_estudiante, $notafinal);
         }
 
-        usort($lista_estudiantes, function($a, $b) {
-                return $b->getNota() - $a->getNota();
-            });
+        $this->ordener($lista_estudiantes, count($lista_estudiantes));
 
-        $grade = Grado::findOrFail($id); #pasamos el grado a la vista
+        $grade = Grado::findOrFail($id);
 
         return view('tercio.primaria.index',compact('lista_estudiantes','grade'));
     }
@@ -65,6 +64,18 @@ class TercioPrimariaController extends Controller
     public function edit(string $id)
     {
         //
+    }
+
+    public function ordener(&$lista,$n){
+        for ($i = 0; $i < $n - 1 ; $i++) {
+            for ($j = $n-1; $j > $i; $j--) {
+                if ($lista[$j]->nota > $lista[$j - 1]->nota) {
+                    $temp = $lista[$j];
+                    $lista[$j] = $lista[$j - 1];
+                    $lista[$j - 1] = $temp;
+                }
+            }
+        }
     }
 
     /**
